@@ -586,7 +586,7 @@ function renderQuestions(){
 document.getElementById('submitBtn').addEventListener('click',async ()=>{
   const name = studentSelect.value;
   if(!name){ alert('Selecione seu nome antes de enviar.'); studentSelect.focus(); return; }
-  if(!SERVER_URL || SERVER_URL.includes('COLE_AQUI')){ alert('Configure a SERVER_URL com a URL do seu Web App (Apps Script) antes de enviar.'); return; }
+  if(!SERVER_URL || SERVER_URL.includes('https://script.google.com/macros/s/AKfycbz5PfKu-UrMf2_S31Iz4cfz-f2A4tRaXV8JjkBAu7tmqs3msvIj0ODSieC3MGRNRqk/exec')){ alert('Configure a SERVER_URL com a URL do seu Web App (Apps Script) antes de enviar.'); return; }
   // coletar respostas
   const responses = [];
   for(const q of QUESTIONS){
@@ -676,3 +676,4 @@ document.getElementById('clearBtn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
