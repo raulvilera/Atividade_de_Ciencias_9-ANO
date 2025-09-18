@@ -1,4 +1,3 @@
-<!-- Salve como atividade_bio.html e abra no navegador (ou hospede em servidor) -->
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -10,6 +9,8 @@
     --silver:#c0c0c0;
     --grad-left: #0e3b8f;
     --grad-right: #000000;
+    --correct-color: #4CAF50;
+    --incorrect-color: #F44336;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
   }
   html,body{height:100%;margin:0;background:var(--silver);color:#111;}
@@ -20,7 +21,7 @@
     border-radius:8px;
     box-shadow: 0 8px 0 rgba(255,255,255,0.6) inset;
     color:#fff;
-    margin-bottom:5mm; /* espaçamento de 5 mm para seu pedido */
+    margin-bottom:5mm;
   }
   .header-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
   .school {font-weight:700;}
@@ -34,7 +35,7 @@
   .questions {margin-top:16px;}
   .q-surface{
     background: linear-gradient(90deg,var(--grad-left),var(--grad-right));
-    padding:16px;border-radius:8px;margin-bottom:5mm; /* 5 mm entre cada questao */
+    padding:16px;border-radius:8px;margin-bottom:5mm;
     box-shadow: 0 8px 0 rgba(255,255,255,0.6) inset;
     color:#fff;
   }
@@ -44,10 +45,31 @@
   .footer{margin-top:16px;display:flex;gap:10px;align-items:center;}
   button{padding:10px 14px;border-radius:8px;border:none;background:#0a6bd6;color:#fff;font-weight:600;cursor:pointer;}
   button.secondary{background:#28a745;}
+  button:disabled{background:#ccc;cursor:not-allowed;}
   .result{margin-top:12px;padding:10px;background:#fff;border-radius:8px;color:#111;}
   pre.debug{white-space:pre-wrap;word-break:break-word;background:#eee;padding:8px;border-radius:6px;}
   .small{font-size:12px;color:#f0f0f0;}
   .hide{display:none;}
+  .correct {color: var(--correct-color); font-weight: bold;}
+  .incorrect {color: var(--incorrect-color); font-weight: bold;}
+  .score-display {font-size: 1.2em; margin-bottom: 10px;}
+  .question-counter {font-size: 14px; color: #ddd; margin-bottom: 5px;}
+  .question-image {
+    margin: 15px 0;
+    text-align: center;
+  }
+  .question-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .image-caption {
+    font-style: italic;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #ddd;
+  }
 </style>
 </head>
 <body>
@@ -67,7 +89,7 @@
     </div>
     <div class="centered-title">
       <h1>ATIVIDADE DE BIOLOGIA (3ºBIMESTRE)</h1>
-      <h2>"REVISÃO DOS TEMAS"</h2>
+      <h2>"REVISÃO DOS TEMAS" - 10 QUESTÕES SORTEADAS</h2>
     </div>
     <div class="small">Observação: as respostas serão enviadas automaticamente para a planilha institucional após confirmação.</div>
   </div>
@@ -99,7 +121,7 @@ const SERVER_URL = 'COLE_AQUI_A_URL_DO_SEU_WEBAPP';
 // ==================== DADOS DOS ALUNOS (conforme sua lista) ====================
 // Estrutura: {name, number, serie, email}
 const STUDENTS = [
-  // 9º ANO A (vou usar "9ºA" como série para preencher automaticamente)
+  // 9º ANO A
   {name:'ÁGATHA NIKOLLE DA SILVA RAMOS', number:'1', serie:'9ºA', email:'00001153810360SP@al.educacao.sp.gov.br'},
   {name:'AMANDA BEATRIZ LEAL MOURAD', number:'2', serie:'9ºA', email:'00001141420077SP@al.educacao.sp.gov.br'},
   {name:'ANNA NICOLY BENVINDO DOS SANTOS', number:'4', serie:'9ºA', email:'00001150804713SP@al.educacao.sp.gov.br'},
@@ -133,7 +155,7 @@ const STUDENTS = [
   {name:'FABIO HENRIQUE DA SILVA', number:'46', serie:'9ºA', email:'00001150833610SP@al.educacao.sp.gov.br'},
   {name:'MIGUEL MARCELO FREITAS SANTANA', number:'49', serie:'9ºA', email:'00001132133609SP@al.educacao.sp.gov.br'},
 
-  // 9º ANO B (resumido)
+  // 9º ANO B
   {name:'ALEJANDRO VIEIRA LIMA', number:'1', serie:'9ºB', email:'00001239445593SP@al.educacao.sp.gov.br'},
   {name:'ALEX GUSTAVO DA SILVA VIEIRA', number:'2', serie:'9ºB', email:'00001117892906SP@al.educacao.sp.gov.br'},
   {name:'ALLAN BEZERRA DE LIMA', number:'3', serie:'9ºB', email:'00001150817495SP@al.educacao.sp.gov.br'},
@@ -162,7 +184,7 @@ const STUDENTS = [
   {name:'PEDRO HENRIQUE QUEIROZ DE JESUS', number:'43', serie:'9ºB', email:'00001150819960SP@al.educacao.sp.gov.br'},
   {name:'ANDREY FELIPE ALVES DOS SANTOS', number:'44', serie:'9ºB', email:'00001260850857sp@al.educacao.sp.gov.br'},
 
-  // 9º ANO C (resumido)
+  // 9º ANO C
   {name:'ALEXANDRE SERAFIM JUNIOR', number:'2', serie:'9ºC', email:'00001141563526SP@al.educacao.sp.gov.br'},
   {name:'ANA LUIZA DO NASCIMENTO', number:'3', serie:'9ºC', email:'00001132074691SP@al.educacao.sp.gov.br'},
   {name:'ARTHUR EMANUEL ALMEIDA REIS', number:'5', serie:'9ºC', email:'00001141451086SP@al.educacao.sp.gov.br'},
@@ -196,65 +218,64 @@ const STUDENTS = [
 ];
 
 // ==================== BANCO DE 50 QUESTÕES (sem gabarito no cliente) ====================
-// Cada questão: { id, aula, text, options: [ {label:'A', text: '...'}, ... ] }
-// IDs foram desenhados para combinar com o gabarito do Apps Script: A1-Q1..A1-Q10, A2-Q1..A5-Q10
+// Cada questão: { id, aula, text, options: [ {label:'A', text: '...'}, ... ], imageUrl (opcional) }
 const QUESTIONS = [
   // Aula 1 - Adaptação e Especiação (A1-Q1..A1-Q10)
-  {id:'A1-Q1', aula:1, text:`Considere dois agrupamentos de coelhos: um vive em uma floresta tropical densa e úmida; outro em um deserto árido. Observando as pressões ambientais (temperatura, disponibilidade de água, predadores e vegetação), analise o enunciado abaixo e escolha a alternativa que descreve com maior precisão as adaptações morfológicas e comportamentais que seriam favorecidas por seleção natural em cada ambiente.`, options:[
+  {id:'A1-Q1', aula:1, text:`Considere dois agrupamentos de coelhos: um vive em uma floresta tropical densa e úmida; outro em um deserto árido. Observando as pressões ambientais (temperatura, disponibilidade de água, predadores e vegetação), analise o enunciado abaixo e escolha a alternativa que descreve com maior precisão as adaptações morfológicas e comportamentais que seriam favorecidas por seleção natural em cada ambiente.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Coelhos+Floresta+e+Deserto', options:[
     {label:'A', text:'Coelhos da floresta desenvolvem pêlo claro para refletir calor; coelhos do deserto desenvolvem membranas interdigitais para nadar.'},
     {label:'B', text:'Na floresta, seleção favoreceria camuflagem e agilidade para escapar de predadores; no deserto, favoreceria capacidade de conservar água (fisiológica) e atividade crepuscular/nocturna (comportamental).'},
     {label:'C', text:'Ambos os grupos tenderiam a reduzir o tamanho corporal por igual, já que menor porte é sempre vantajoso em qualquer habitat.'},
     {label:'D', text:'A única adaptação esperada no deserto seria o desenvolvimento de asas para migração.'}
   ]},
-  {id:'A1-Q2', aula:1, text:`A definição de adaptação pode ser morfológica, fisiológica ou comportamental. A seguir há uma lista de exemplos. Identifique a alternativa que classifica corretamente cada exemplo: (1) Bico especializado de beija-flor; (2) Capacidade de um cacto armazenar água; (3) Migração de aves em busca de alimento.`, options:[
+  {id:'A1-Q2', aula:1, text:`A definição de adaptação pode ser morfológica, fisiológica ou comportamental. A seguir há uma lista de exemplos. Identifique a alternativa que classifica corretamente cada exemplo: (1) Bico especializado de beija-flor; (2) Capacidade de um cacto armazenar água; (3) Migração de aves em busca de alimento.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Beija-flor+Cacto+Migração', options:[
     {label:'A', text:'(1) comportamental; (2) morfológica; (3) fisiológica.'},
     {label:'B', text:'(1) morfológica; (2) fisiológica; (3) comportamental.'},
     {label:'C', text:'(1) fisiológica; (2) comportamental; (3) morfológica.'},
     {label:'D', text:'(1) morfológica; (2) comportamental; (3) fisiológica.'}
   ]},
-  {id:'A1-Q3', aula:1, text:`Imagine que uma população de peixes migrou para um novo lago isolado e, ao longo de muitas gerações, passou a exibir diferenças de cor e comportamento de acasalamento em relação à população original. Esse cenário ilustra principalmente qual processo evolutivo e por qual mecanismo?`, options:[
+  {id:'A1-Q3', aula:1, text:`Imagine que uma população de peixes migrou para um novo lago isolado e, ao longo de muitas gerações, passou a exibir diferenças de cor e comportamento de acasalamento em relação à população original. Esse cenário ilustra principalmente qual processo evolutivo e por qual mecanismo?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Peixes+Isolamento+Geográfico', options:[
     {label:'A', text:'Especiação por isolamento geográfico (alopátrica), decorrente da interrupção do fluxo gênico e de pressões seletivas distintas no novo ambiente.'},
     {label:'B', text:'Evolução convergente, porque as cores mudaram devido a fatores semelhantes.'},
     {label:'C', text:'Fixismo, pois as espécies permanencem inalteradas a não ser por intervenção humana.'},
     {label:'D', text:'Apenas um exemplo de mutação sem importância adaptativa.'}
   ]},
-  {id:'A1-Q4', aula:1, text:`Com base no conceito biológico de espécie de Ernst Mayr, avalie a seguinte afirmativa: "Duas populações que não são capazes de produzir descendentes férteis entre si são consideradas espécies diferentes." Analise as implicações desse conceito para o estudo da biodiversidade e escolha a alternativa que apresenta a melhor justificativa prática.`, options:[
+  {id:'A1-Q4', aula:1, text:`Com base no conceito biológico de espécie de Ernst Mayr, avalie a seguinte afirmativa: "Duas populações que não são capazes de produzir descendentes férteis entre si são consideradas espécies diferentes." Analise as implicações desse conceito para o estudo da biodiversidade e escolha a alternativa que apresenta a melhor justificativa prática.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Isolamento+Reprodutivo', options:[
     {label:'A', text:'O conceito é inútil porque a esterilidade não ocorre na natureza.'},
     {label:'B', text:'O conceito é útil apenas para plantas, não para animais.'},
     {label:'C', text:'O conceito ajuda a identificar barreiras reprodutivas, mas pode ser limitado em organismos assexuados ou com hibridação frequente.'},
     {label:'D', text:'O conceito implica que qualquer diferença morfológica define espécies distintas.'}
   ]},
-  {id:'A1-Q5', aula:1, text:`No gráfico hipotético abaixo (imagine uma curva que mostra frequência de um alelo ao longo de gerações em duas populações separadas por uma barreira), observa-se que uma variante aumenta em frequência em uma população e diminui na outra. Essa diferença pode decorrer de qual mecanismo evolutivo com maior probabilidade?`, options:[
+  {id:'A1-Q5', aula:1, text:`No gráfico hipotético abaixo (imagine uma curva que mostra frequência de um alelo ao longo de gerações em duas populações separadas por uma barreira), observa-se que uma variante aumenta em frequência em uma população e diminui na outra. Essa diferença pode decorrer de qual mecanismo evolutivo com maior probabilidade?`, imageUrl: 'https://via.placeholder.com/600x300?text=Gráfico+Fluxo+Gênico', options:[
     {label:'A', text:'Fluxo gênico intenso entre as populações, mantendo-as homogêneas.'},
     {label:'B', text:'Interrupção do fluxo gênico após isolamento, seguida de seleção natural divergente e deriva genética.'},
     {label:'C', text:'Fixismo genético que impede mudanças.'},
     {label:'D', text:'Migração constante de indivíduos entre as populações, nivelando as frequências.'}
   ]},
-  {id:'A1-Q6', aula:1, text:`Considere dois lagos separados por uma cordilheira: um lago frio de altitude e outro quente em planície. Ao longo de milhões de anos, populações de um peixe que ocuparam ambos os lagos desenvolveram diferenças reprodutivas. Esse é um exemplo clássico de:`, options:[
-    {label:'A', text:'Especiação alopátrica, pois a barreira física gerou isolamento reprodutivo ao longo do tempo.'},
+  {id:'A1-Q6', aula:1, text:`Considere dois lagos separados por uma cordilheira: um lago frio de altitude e outro quente em planície. Ao longo de milhões de anos, populações de um peixe que ocuparam ambos os lagos desenvolveram diferenças reprodutivas. Esse é um exemplo clássico de:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Especiação+Alopátrica', options:[
+    {label:'A', text:'Especiação alopátrica, pois a barreira física gerar isolamento reprodutivo ao longo do tempo.'},
     {label:'B', text:'Evolução convergente, porque ambos os peixes mantiveram as mesmas características.'},
     {label:'C', text:'Fixismo, já que não houve mudança real.'},
     {label:'D', text:'Seleção artificial promovida por humanos.'}
   ]},
-  {id:'A1-Q7', aula:1, text:`Qual das alternativas apresenta corretamente uma adaptação fisiológica que ajudaria um vegetal a sobreviver em ambiente árido?`, options:[
+  {id:'A1-Q7', aula:1, text:`Qual das alternativas apresenta corretamente uma adaptação fisiológica que ajudaria um vegetal a sobreviver em ambiente árido?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Adaptação+Plantas+Áridas', options:[
     {label:'A', text:'Folíolos delgados e pouca capacidade de armazenar água.'},
     {label:'B', text:'Raízes superficiais que evitam captar água.'},
     {label:'C', text:'Capacidade de armazenar água nos tecidos e metabolismo CAM para reduzir perda de água.'},
     {label:'D', text:'Produção de flores grandes sem relação com polinização.'}
   ]},
-  {id:'A1-Q8', aula:1, text:`Analise a afirmativa: "Se uma barreira geográfica desaparecer, populações isoladas sempre se hibridizam novamente formando uma única população." Com base em conceitos de isolamento reprodutivo, avalie a alternativa correta.`, options:[
+  {id:'A1-Q8', aula:1, text:`Analise a afirmativa: "Se uma barreira geográfica desaparecer, populações isoladas sempre se hibridizam novamente formando uma única população." Com base em conceitos de isolamento reprodutivo, avalie a alternativa correta.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Hibridação', options:[
     {label:'A', text:'Verdadeiro — barreiras removidas garantem sempre fluxo gênico total.'},
     {label:'B', text:'Verdadeiro — seleção natural sempre faz as populações voltarem a ser idênticas.'},
     {label:'C', text:'Falso — diferenças acumuladas podem prevenir cruzamentos ou gerar híbridos estéreis.'},
     {label:'D', text:'Falso — pois espécies são definidas apenas por características morfológicas.'}
   ]},
-  {id:'A1-Q9', aula:1, text:`Explique por que mutações aleatórias podem levar a adaptações vantajosas e, consequentemente, ao aumento de frequência desses traços em uma população. Escolha a alternativa que descreve corretamente esse processo.`, options:[
+  {id:'A1-Q9', aula:1, text:`Explique por que mutações aleatórias podem levar a adaptações vantajosas e, consequentemente, ao aumento de frequência desses traços em uma população. Escolha a alternativa que descreve corretamente esse processo.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Mutações+Seleção+Natural', options:[
     {label:'A', text:'Mutação gera variação; se um traço confere vantagem reprodutiva, a seleção natural aumenta sua frequência ao longo de gerações.'},
     {label:'B', text:'Mutação é sempre prejudicial e reduz a chance de sobrevivência.'},
     {label:'C', text:'Mutações aparecem apenas quando necessárias e sob controle consciente dos organismos.'},
     {label:'D', text:'Mutações não têm relação nenhuma com adaptação.'}
   ]},
-  {id:'A1-Q10', aula:1, text:`Com base no PDF (aula sobre especiação), descreva o papel do fluxo gênico no contexto da especiação e escolha a alternativa que resume corretamente seu efeito.` , options:[
+  {id:'A1-Q10', aula:1, text:`Com base no PDF (aula sobre especiação), descreva o papel do fluxo gênico no contexto da especiação e escolha a alternativa que resume corretamente seu efeito.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Fluxo+Gênico', options:[
     {label:'A', text:'O fluxo gênico conecta populações geneticamente; quando interrompido, permite divergência genética e especiação.'},
     {label:'B', text:'Fluxo gênico impede que populações se adaptem a ambientes diferentes.'},
     {label:'C', text:'Fluxo gênico é um processo que apenas aumenta a diversidade dentro de um indivíduo.'},
@@ -262,61 +283,61 @@ const QUESTIONS = [
   ]},
 
   // Aula 2 - Evolução convergente/divergente (A2-Q1..A2-Q10)
-  {id:'A2-Q1', aula:2, text:`Observe um cladograma hipotético onde dois grupos distantes possuem uma estrutura semelhante (por exemplo, corpo hidrodinâmico). Qual conclusão sobre origem dessa estrutura é a mais coerente?`, options:[
+  {id:'A2-Q1', aula:2, text:`Observe um cladograma hipotético onde dois grupos distantes possuem uma estrutura semelhante (por exemplo, corpo hidrodinâmico). Qual conclusão sobre origem dessa estrutura é a mais coerente?`, imageUrl: 'https://via.placeholder.com/600x300?text=Cladograma+Evolução+Convergente', options:[
     {label:'A', text:'A estrutura necessariamente veio de um ancestral muito próximo.'},
     {label:'B', text:'A semelhança indica que os grupos são a mesma espécie.'},
     {label:'C', text:'Provavelmente trata-se de evolução convergente: pressões ambientais semelhantes geraram característica análoga em ramos distintos.'},
     {label:'D', text:'Pode ser atribuída ao fixismo.'}
   ]},
-  {id:'A2-Q2', aula:2, text:`Defina sinapomorfia e relacione-a a um grupo monofilético. Escolha a alternativa que exemplifique corretamente esses conceitos.` , options:[
+  {id:'A2-Q2', aula:2, text:`Defina sinapomorfia e relacione-a a um grupo monofilético. Escolha a alternativa que exemplifique corretamente esses conceitos.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Sinapomorfia', options:[
     {label:'A', text:'Sinapomorfia é uma característica ancestral compartilhada por todos os organismos.'},
     {label:'B', text:'Sinapomorfia é uma característica derivada compartilhada por todos os membros de um grupo que define um clado monofilético.'},
     {label:'C', text:'Sinapomorfia é qualquer característica que surge independentemente em ramos distintos.'},
     {label:'D', text:'Sinapomorfia significa que duas espécies não possuem relação evolutiva.'}
   ]},
-  {id:'A2-Q3', aula:2, text:`Combinações abaixo explicam corretamente a diferença entre estruturas análogas e homólogas. Marque a alternativa correta.`, options:[
+  {id:'A2-Q3', aula:2, text:`Combinações abaixo explicam corretamente a diferença entre estruturas análogas e homólogas. Marque a alternativa correta.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Estruturas+Homólogas+e+Análogas', options:[
     {label:'A', text:'Análogas: mesmas origens, mesmas funções; Homólogas: origens diferentes, funções iguais.'},
     {label:'B', text:'Análogas: diferentes funções; Homólogas: mesmas funções.'},
     {label:'C', text:'Análogas: mesmas funções, origens evolutivas distintas (ex.: asas de insetos e aves); Homólogas: mesma origem, funções que podem divergir (ex.: membros de mamíferos).'},
     {label:'D', text:'Não existe diferença entre elas.'}
   ]},
-  {id:'A2-Q4', aula:2, text:`No cladograma que representa nadadeiras caudais, Teleostei apresenta nadadeira homocerca, enquanto outros grupos possuem heterocerca. O que isso indica sobre Teleostei?`, options:[
+  {id:'A2-Q4', aula:2, text:`No cladograma que representa nadadeiras caudais, Teleostei apresenta nadadeira homocerca, enquanto outros grupos possuem heterocerca. O que isso indica sobre Teleostei?`, imageUrl: 'https://via.placeholder.com/600x300?text=Cladograma+Nadadeiras', options:[
     {label:'A', text:'Teleostei possui característica derivada (homocerca) que define um grupo monofilético dentro do cladograma.'},
     {label:'B', text:'Teleostei é grupo artificial sem significado evolutivo.'},
     {label:'C', text:'Teleostei é ancestral de todos os peixes cartilaginosos.'},
     {label:'D', text:'Teleostei não está relacionado aos outros peixes.'}
   ]},
-  {id:'A2-Q5', aula:2, text:`Ao interpretar um cladograma, qual é a função de um nó (node) e o que ele representa?`, options:[
+  {id:'A2-Q5', aula:2, text:`Ao interpretar um cladograma, qual é a função de um nó (node) e o que ele representa?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Nó+Cladograma', options:[
     {label:'A', text:'Um nó representa um indivíduo específico em tempo presente.'},
     {label:'B', text:'Um nó indica uma barreira geográfica.'},
     {label:'C', text:'Um nó representa o ancestral comum mais recente compartilhado entre dois ramos.'},
-    {label:'D', text:'Um nó é apenas elemento visual sem significado.’'}
+    {label:'D', text:'Um nó é apenas elemento visual sem significado.'}
   ]},
-  {id:'A2-Q6', aula:2, text:`Analise as alternativas sobre características ancestrais x derivadas e marque a correta.`, options:[
+  {id:'A2-Q6', aula:2, text:`Analise as alternativas sobre características ancestrais x derivadas e marque a correta.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Características+Ancestrais+Derivadas', options:[
     {label:'A', text:'Características ancestrais surgem em ramos distintos devido à convergência.'},
     {label:'B', text:'Características derivadas (apomorfias) surgem após um nó e podem definir grupos monofiléticos.'},
     {label:'C', text:'Características análogas são sempre derivadas.'},
     {label:'D', text:'Características ancestrais e derivadas são termos intercambiáveis.'}
   ]},
-  {id:'A2-Q7', aula:2, text:`Considerando seleção artificial em pombos que originou raças com diferenças marcantes (papo inflado, cauda em leque), esse processo ilustra:`, options:[
+  {id:'A2-Q7', aula:2, text:`Considerando seleção artificial em pombos que originou raças com diferenças marcantes (papo inflado, cauda em leque), esse processo ilustra:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Seleção+Artificial+Pombos', options:[
     {label:'A', text:'Evolução convergente natural.'},
     {label:'B', text:'Fixismo por seleção natural.'},
     {label:'C', text:'Deriva genética sem intervenção.'},
     {label:'D', text:'Divergência evolutiva via seleção artificial a partir de um ancestral comum.'}
   ]},
-  {id:'A2-Q8', aula:2, text:`A presença de nadadeira homocerca em Teleostei é um exemplo de sinapomorfia. O que isso implica na construção de grupos no cladograma?`, options:[
+  {id:'A2-Q8', aula:2, text:`A presença de nadadeira homocerca em Teleostei é um exemplo de sinapomorfia. O que isso implica na construção de grupos no cladograma?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Sinapomorfia+Nadadeira', options:[
     {label:'A', text:'Que a nadadeira homocerca é uma característica ancestral para todos os vertebrados.'},
     {label:'B', text:'Que Teleostei não compartilha ancestrais com outros peixes.'},
     {label:'C', text:'Que a presença de nadadeira homocerca define um clado monofilético dentro do conjunto analisado.'},
     {label:'D', text:'Nada pode ser inferido a partir dessa informação.'}
   ]},
-  {id:'A2-Q9', aula:2, text:`Qual das alternativas abaixo melhor descreve a evolução convergente?`, options:[
+  {id:'A2-Q9', aula:2, text:`Qual das alternativas abaixo melhor descreve a evolução convergente?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Evolução+Convergente', options:[
     {label:'A', text:'Organismos com ancestral comum recente se tornam parecidos por seleção sexual.'},
     {label:'B', text:'Apenas organismos aquáticos se tornam hidrodinâmicos.'},
     {label:'C', text:'Organismos de linhagens diferentes desenvolvem características semelhantes por pressões ambientais parecidas, sem ancestral comum recente.'},
-    {label:'D', text:'Todos os casos de similaridade indicam parentesco próximo.'}
+    {label:'D', text:'Todos os casos de similaridade indican parentesco próximo.'}
   ]},
-  {id:'A2-Q10', aula:2, text:`Ao analisar um cladograma, você nota que uma característica aparece em ramos distintos sem estar presente no nó ancestral. Tal padrão é evidência de:`, options:[
+  {id:'A2-Q10', aula:2, text:`Ao analisar um cladograma, você nota que uma característica aparece em ramos distintos sem estar presente no nó ancestral. Tal padrão é evidência de:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Evolução+Convergente+Cladograma', options:[
     {label:'A', text:'Sinapomorfia compartilhada.'},
     {label:'B', text:'Característica ancestral universal.'},
     {label:'C', text:'Evolução convergente/independente (apomorfia surgida separadamente).'},
@@ -324,61 +345,61 @@ const QUESTIONS = [
   ]},
 
   // Aula 3 - Evidências da Evolução (A3-Q1..A3-Q10)
-  {id:'A3-Q1', aula:3, text:`Os fósseis de transição (por exemplo, Archaeopteryx) são considerados evidências importantes da evolução. Explique por que fósseis de transição suportam a ideia de transformações graduais entre grupos.` , options:[
+  {id:'A3-Q1', aula:3, text:`Os fósseis de transição (por exemplo, Archaeopteryx) são considerados evidências importantes da evolução. Explique por que fósseis de transição suportam a ideia de transformações graduais entre grupos.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Fóssil+Transição', options:[
     {label:'A', text:'Porque mostram combinações de características de dois grupos distintos, indicando estados intermediários ao longo do tempo.'},
     {label:'B', text:'Porque provam que todas as espécies surgem instantaneamente.'},
     {label:'C', text:'Porque indicam que espécies híbridas dominavam o passado.'},
     {label:'D', text:'Porque sempre preservam DNA completo das espécies extintas.'}
   ]},
-  {id:'A3-Q2', aula:3, text:`A datação por carbono-14 é útil para estimar idades de materiais orgânicos. Qual é a limitação principal dessa técnica em estudos paleontológicos?`, options:[
+  {id:'A3-Q2', aula:3, text:`A datação por carbono-14 é útil para estimar idades de materiais orgânicos. Qual é a limitação principal dessa técnica em estudos paleontológicos?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Datação+Carbono', options:[
     {label:'A', text:'A meia-vida do carbono-14 (~5.730 anos) limita o método a materiais relativamente recentes (até ~50 mil anos), sendo inadequado para fósseis muito antigos.'},
     {label:'B', text:'O método funciona apenas em rochas ígneas.'},
     {label:'C', text:'Carbono-14 é produzido apenas em laboratório.'},
     {label:'D', text:'Não existe limitação; é aplicável a qualquer época.'}
   ]},
-  {id:'A3-Q3', aula:3, text:`Semelhanças embrionárias entre vertebrados (ex.: presença de fendas branquiais em embriões) são interpretadas como evidência de:`, options:[
+  {id:'A3-Q3', aula:3, text:`Semelhanças embrionárias entre vertebrados (ex.: presença de fendas branquiais em embriões) são interpretadas como evidência de:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Embriologia+Comparada', options:[
     {label:'A', text:'Homologias no desenvolvimento indicando um ancestral comum e padrões conservados de desenvolvimento.'},
     {label:'B', text:'Evolução convergente de embriões entre espécies sem relação.'},
     {label:'C', text:'Um erro de observação sem significado evolutivo.'},
     {label:'D', text:'Que embriões representam espécies adultas em miniatura.'}
   ]},
-  {id:'A3-Q4', aula:3, text:`A análise de DNA entre humanos e chimpanzés mostra alta similaridade (~98%). Qual inferência evolutiva é mais adequada a partir dessa informação?`, options:[
+  {id:'A3-Q4', aula:3, text:`A análise de DNA entre humanos e chimpanzés mostra alta similaridade (~98%). Qual inferência evolutiva é mais adequada a partir dessa informação?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+DNA+Humano+Chimpanzé', options:[
     {label:'A', text:'Humano e chimpanzé compartilham um ancestral comum relativamente recente; alto nível de similaridade genética confirma parentesco.'},
     {label:'B', text:'Humano evoluiu do chimpanzé diretamente há poucas centenas de anos.'},
     {label:'C', text:'A similaridade é coincidência sem relação evolutiva.'},
     {label:'D', text:'Sequências semelhantes implicam que são a mesma espécie.'}
   ]},
-  {id:'A3-Q5', aula:3, text:`O "relógio molecular" é usado para estimar tempos de divergência entre espécies com base em taxas de mutação. Qual é uma limitação desse método?`, options:[
+  {id:'A3-Q5', aula:3, text:`O "relógio molecular" é usado para estimar tempos de divergência entre espécies com base em taxas de mutação. Qual é uma limitação desse método?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Relógio+Molecular', options:[
     {label:'A', text:'A variabilidade nas taxas de mutação entre genes e linhagens exige calibração por fósseis ou outros dados; sem calibração, as estimativas podem ser imprecisas.'},
     {label:'B', text:'Ele não usa DNA, apenas anatomia.'},
     {label:'C', text:'É aplicável apenas a microrganismos.'},
     {label:'D', text:'É uma técnica que substitui completamente o registro fóssil sem necessidade de correlação.'}
   ]},
-  {id:'A3-Q6', aula:3, text:`Evidências de evolução observáveis em "tempo real" incluem resistência bacteriana a antibióticos. Explique por que esses casos ilustram seleção natural em ação.`, options:[
+  {id:'A3-Q6', aula:3, text:`Evidências de evolução observáveis em "tempo real" incluem resistência bacteriana a antibióticos. Explique por que esses casos ilustram seleção natural em ação.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Resistência+Antibióticos', options:[
     {label:'A', text:'Porque mutações que conferem resistência aumentam a sobrevivência em ambientes com antibióticos, logo indivíduos resistentes se tornam mais frequentes.'},
     {label:'B', text:'Porque bactérias decidem conscientemente se tornar resistentes.'},
     {label:'C', text:'Porque antibióticos provocam cruzamentos entre bactérias.'},
     {label:'D', text:'Porque resistência bacteriana significa que a evolução parou.'}
   ]},
-  {id:'A3-Q7', aula:3, text:`A paleontologia frequentemente apresenta lacunas no registro fóssil. Mesmo assim, fósseis são fundamentais. Escolha a alternativa que melhor explica esse papel.` , options:[
+  {id:'A3-Q7', aula:3, text:`A paleontologia frequentemente apresenta lacunas no registro fóssil. Mesmo assim, fósseis são fundamentais. Escolha a alternativa que melhor explica esse papel.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Registro+Fóssil', options:[
     {label:'A', text:'Fósseis fornecem evidências diretas de formas de vida passadas, permitindo rastrear mudanças morfológicas e calibrar hipóteses evolutivas, embora o registro seja incompleto.'},
     {label:'B', text:'Fósseis são inúteis porque sempre faltam dados.'},
     {label:'C', text:'Fósseis sempre preservam DNA intacto para comparação direta.'},
     {label:'D', text:'Fósseis não têm nenhuma relação com evolução.'}
   ]},
-  {id:'A3-Q8', aula:3, text:`Biologia do desenvolvimento evolutivo (evo-devo) investiga genes como HOX. Por que pequenas mutações nesses genes podem causar grandes variações fenotípicas?`, options:[
+  {id:'A3-Q8', aula:3, text:`Biologia do desenvolvimento evolutivo (evo-devo) investiga genes como HOX. Por que pequenas mutações nesses genes podem causar grandes variações fenotípicas?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Genes+HOX', options:[
     {label:'A', text:'Porque genes de desenvolvimento são reguladores mestres que controlam padrões de construção do corpo; alterações neles podem reorientar o desenvolvimento de estruturas importantes.'},
     {label:'B', text:'Porque HOX é responsável apenas pela cor da pele.'},
     {label:'C', text:'Porque mutações em HOX são sempre letais e não observáveis.'},
-    {label:'D', text:'Porque HOX não está relacionado ao desenvolvimento' }
+    {label:'D', text:'Porque HOX não está relacionado ao desenvolvimento'}
   ]},
-  {id:'A3-Q9', aula:3, text:`Entre as alternativas a seguir, qual resumidamente indica por que combinações de diferentes linhas de evidência (fósseis, embriologia, genética) são mais robustas do que uma única linha de evidência?`, options:[
-    {label:'A', text:'Porque evidências independentes que convergem para a mesma conclusão reduzem a chance de interpretação equivocada e fortalecem as inferências históricas.'},
+  {id:'A3-Q9', aula:3, text:`Entre as alternativas a seguir, qual resumidamente indica por que combinações de diferentes linhas de evidência (fósseis, embriologia, genética) são mais robustas do que uma única linha de evidência?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Linhas+Evidência', options:[
+    {label:'A', text:'Porque evidências independentes que convergem para a mesma conclusão reducem a chance de interpretação equivocada e fortalecem as inferências históricas.'},
     {label:'B', text:'Porque múltiplas evidências têm sempre os mesmos defeitos.'},
     {label:'C', text:'Porque genética e fósseis mostram sempre resultados contraditórios.'},
     {label:'D', text:'Porque apenas a embriologia é confiável.'}
   ]},
-  {id:'A3-Q10', aula:3, text:`Um paleontólogo encontra um fóssil com caracteres intermediários entre répteis e aves. Que papel esse achado cumpre no debate sobre a evolução das aves?`, options:[
+  {id:'A3-Q10', aula:3, text:`Um paleontólogo encontra um fóssil com caracteres intermediários entre répteis e aves. Que papel esse achado cumpre no debate sobre a evolução das aves?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Fóssil+Réptil+Ave', options:[
     {label:'A', text:'Fornece suporte empírico à hipótese de transição evolutiva entre répteis e aves, ilustrando etapas intermediárias.'},
     {label:'B', text:'Desmente a evolução porque espécies intermediárias não existem.'},
     {label:'C', text:'Prova que répteis e aves são idênticos.'},
@@ -386,61 +407,61 @@ const QUESTIONS = [
   ]},
 
   // Aula 4 - Biodiversidade (A4-Q1..A4-Q10)
-  {id:'A4-Q1', aula:4, text:`A biodiversidade pode ser entendida em três níveis: diversidade genética, de espécies e de ecossistemas. Para um manejo eficaz da conservação, por que é necessário considerar os três níveis simultaneamente?`, options:[
+  {id:'A4-Q1', aula:4, text:`A biodiversidade pode ser entendida em três níveis: diversidade genética, de espécies e de ecossistemas. Para um manejo eficaz da conservação, por que é necessário considerar os três níveis simultaneamente?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Níveis+Biodiversidade', options:[
     {label:'A', text:'Porque diversidade genética permite adaptabilidade; diversidade de espécies mantém funções ecológicas; diversidade de ecossistemas assegura resiliência e serviços. Ignorar qualquer nível reduz sucesso de conservação.'},
     {label:'B', text:'Porque apenas diversidade de espécies é relevante.'},
     {label:'C', text:'Porque diversidade genética é sempre negligenciável.'},
     {label:'D', text:'Porque ecossistemas são todos iguais e não precisam de estudo.'}
   ]},
-  {id:'A4-Q2', aula:4, text:`Defina serviços ecossistêmicos e indique corretamente um exemplo de cada categoria (provisão, regulação, cultural, suporte).`, options:[
+  {id:'A4-Q2', aula:4, text:`Defina serviços ecossistêmicos e indique corretamente um exemplo de cada categoria (provisão, regulação, cultural, suporte).`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Serviços+Ecossistêmicos', options:[
     {label:'A', text:'Provisão: madeira; Regulação: controle climático; Cultural: recreação; Suporte: ciclagem de nutrientes.'},
     {label:'B', text:'Provisão: poluição; Regulação: extinção; Cultural: mineração; Suporte: degradação.'},
     {label:'C', text:'Provisão: serviços bancários; Regulação: impostos; Cultural: televisão; Suporte: transporte público.'},
     {label:'D', text:'Provisão: nada; Regulação: nada; Cultural: nada; Suporte: nada.'}
   ]},
-  {id:'A4-Q3', aula:4, text:`Quais fatores contribuem diretamente para a maior diversidade de espécies em florestas tropicais comparadas a desertos?`, options:[
+  {id:'A4-Q3', aula:4, text:`Quais fatores contribuem diretamente para a maior diversidade de espécies em florestas tropicais comparadas a desertos?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Floresta+Tropical+Deserto', options:[
     {label:'A', text:'Maior disponibilidade de recursos, clima estável e uma complexa rede de interações ecológicas.'},
     {label:'B', text:'Menos espécies por causa da competição intensa.'},
     {label:'C', text:'Porque florestas tropicais são sempre menores em área.'},
     {label:'D', text:'Porque desertos são mais antigos que florestas e, portanto, menos diversos.'}
   ]},
-  {id:'A4-Q4', aula:4, text:`A perda de habitat é uma ameaça chave à biodiversidade. Entre as alternativas abaixo, qual NÃO representa uma consequência direta da perda de habitat?`, options:[
+  {id:'A4-Q4', aula:4, text:`A perda de habitat é uma ameaça chave à biodiversidade. Entre as alternativas abaixo, qual NÃO representa uma consequência direta da perda de habitat?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Perda+Habitat', options:[
     {label:'A', text:'Redução do tamanho das populações e perda de conectividade entre fragmentos.'},
     {label:'B', text:'Aumento da vulnerabilidade a extinções locais.'},
     {label:'C', text:'Melhora imediata e sustentável da diversidade biológica no longo prazo.'},
     {label:'D', text:'Diminuição de serviços ecossistêmicos como polinização e purificação de água.'}
   ]},
-  {id:'A4-Q5', aula:4, text:`Explique a relação entre extinções em massa e irradiações adaptativas subsequentes (ex.: mamíferos após extinção dos dinossauros).`, options:[
+  {id:'A4-Q5', aula:4, text:`Explique a relação entre extinções em massa e irradiações adaptativas subsequentes (ex.: mamíferos após extinção dos dinossauros).`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Extinção+Irradiação', options:[
     {label:'A', text:'Extinções em massa eliminam competidores e abrem nichos ecológicos, permitindo que linagens sobreviventes diversifiquem-se adaptativamente.'},
     {label:'B', text:'Extinções em massa impedem qualquer nova radiação de espécies.'},
     {label:'C', text:'Irradiação adaptativa reduz biodiversidade em larga escala.'},
     {label:'D', text:'Não há relação entre extinções e irradiações adaptativas.'}
   ]},
-  {id:'A4-Q6', aula:4, text:`A conservação baseada em unidades de conservação (UCs) é uma estratégia usada para proteger a biodiversidade. Qual das alternativas descreve melhor uma função das UCs?`, options:[
+  {id:'A4-Q6', aula:4, text:`A conservação baseada em unidades de conservação (UCs) é uma estratégia usada para proteger a biodiversidade. Qual das alternativas descreve melhor uma função das UCs?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Unidades+Conservação', options:[
     {label:'A', text:'Ucs servem apenas para turismo e não influenciam biodiversidade.'},
     {label:'B', text:'Ucs garantem proteção legal de áreas, preservam habitat crítico e podem manter corredores ecológicos entre populações.'},
     {label:'C', text:'Ucs incentivam a desmatação controlada.'},
     {label:'D', text:'Ucs servem para depositar lixo.'}
   ]},
-  {id:'A4-Q7', aula:4, text:`O ODS 15 tem objetivo relacionado à vida terrestre. Escolha a alternativa que melhor descreve uma meta desse ODS.` , options:[
+  {id:'A4-Q7', aula:4, text:`O ODS 15 tem objetivo relacionado à vida terrestre. Escolha a alternativa que melhor descreve uma meta desse ODS.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+ODS+15', options:[
     {label:'A', text:'Proteger, restaurar e promover uso sustentável dos ecossistemas terrestres e frear a perda de biodiversidade.'},
     {label:'B', text:'Eliminar todas as áreas protegidas e abrir espaço para exploração.'},
     {label:'C', text:'Reduzir áreas florestais para aumentar agricultura sem medidas sustentáveis.'},
     {label:'D', text:'Promover a extinção de espécies invasoras sem monitoramento.'}
   ]},
-  {id:'A4-Q8', aula:4, text:`Indique qual abordagem é mais eficaz para diminuir a pegada ecológica de uma comunidade local.` , options:[
+  {id:'A4-Q8', aula:4, text:`Indique qual abordagem é mais eficaz para diminuir a pegada ecológica de uma comunidade local.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Pegada+Ecológica', options:[
     {label:'A', text:'Promover consumo consciente, gestão de resíduos, práticas agrícolas sustentáveis e proteção de áreas naturais integradas com políticas públicas.'},
     {label:'B', text:'Aumentar consumo de recursos e poluição para estimular a economia.'},
     {label:'C', text:'Remover todas as unidades de conservação para expandir áreas urbanas.'},
     {label:'D', text:'Estimular apenas o turismo massivo sem planejar infra-estrutura ambiental.'}
   ]},
-  {id:'A4-Q9', aula:4, text:`Por que a diversidade genética dentro de uma população é crucial para sua capacidade de responder a mudanças ambientais (ex.: surgimento de novos patógenos)?`, options:[
+  {id:'A4-Q9', aula:4, text:`Por que a diversidade genética dentro de uma população é crucial para sua capacidade de responder a mudanças ambientais (ex.: surgimento de novos patógenos)?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Diversidade+Genética', options:[
     {label:'A', text:'Porque maior diversidade genética garante maior probabilidade de existirem variantes que tolerem novas pressões, aumentando chance de persistência.'},
     {label:'B', text:'Porque diversidade genética impede qualquer mutação.'},
     {label:'C', text:'Porque indivíduos idênticos geneticamente se adaptam melhor.'},
     {label:'D', text:'Porque diversidade genética reduz a capacidade de reprodução.'}
   ]},
-  {id:'A4-Q10', aula:4, text:`Assinale a alternativa que apresenta uma prática de manejo que pode conciliar conservação da biodiversidade e desenvolvimento sustentável local.` , options:[
+  {id:'A4-Q10', aula:4, text:`Assinale a alternativa que apresenta uma prática de manejo que pode conciliar conservação da biodiversidade e desenvolvimento sustentável local.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Manejo+Sustentável', options:[
     {label:'A', text:'Criação de áreas protegidas com uso sustentável associado (agroflorestas), educação ambiental e participação comunitária.'},
     {label:'B', text:'Exploração predatória sem regulamentação.'},
     {label:'C', text:'Urbanização total de áreas naturais.'},
@@ -448,61 +469,61 @@ const QUESTIONS = [
   ]},
 
   // Aula 5 - Preservação e Impacto Humano (A5-Q1..A5-Q10)
-  {id:'A5-Q1', aula:5, text:`Entre as estratégias de preservação da biodiversidade, qual das alternativas representa ação governamental e comunitária integrada?`, options:[
+  {id:'A5-Q1', aula:5, text:`Entre as estratégias de preservação da biodiversidade, qual das alternativas representa ação governamental e comunitária integrada?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Preservação+Biodiversidade', options:[
     {label:'A', text:'Aprovação e implementação de unidades de conservação junto com educação ambiental e incentivos a práticas sustentáveis pelos moradores locais.'},
     {label:'B', text:'Desregularização total das áreas protegidas.'},
     {label:'C', text:'Privatização indiscriminada de todos os ecossistemas.'},
     {label:'D', text:'Construção de obras sem estudos ambientais.'}
   ]},
-  {id:'A5-Q2', aula:5, text:`Espécies invasoras podem causar grande impacto. Qual das alternativas descreve uma medida eficaz de controle?`, options:[
+  {id:'A5-Q2', aula:5, text:`Espécies invasoras podem causar grande impacto. Qual das alternativas descreve uma medida eficaz de controle?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Espécies+Invasoras', options:[
     {label:'A', text:'Ignorar a presença de invasoras até que o problema se estabilize.'},
-    {label:'B', text:'Implementação de programas de detecção precoce, controle biológico/remoção e restauração de habitat nativo.'},
+    {label:'B', text:'Implementação de programas de detecção precoce, controle biológico/remoção e restauração e habitat nativo.'},
     {label:'C', text:'Introduzir mais espécies exóticas para competir com a invasora.'},
     {label:'D', text:'Queimar grandes áreas sem critérios.'}
   ]},
-  {id:'A5-Q3', aula:5, text:`Explique por que políticas públicas (leis ambientais) são essenciais para a preservação da biodiversidade.`, options:[
+  {id:'A5-Q3', aula:5, text:`Explique por que políticas públicas (leis ambientais) são essenciais para a preservação da biodiversidade.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Políticas+Públicas+Ambientais', options:[
     {label:'A', text:'Porque definem regras, financiam conservação, regulam exploração de recursos e incentivam práticas sustentáveis em escala que indivíduos isolados não conseguiriam.'},
     {label:'B', text:'Porque leis resolvem tudo sem necessidade de monitoramento.'},
     {label:'C', text:'Porque leis podem ser ignoradas sem consequências.'},
     {label:'D', text:'Porque políticas públicas sempre prejudicam biodiversidade.'}
   ]},
-  {id:'A5-Q4', aula:5, text:`Práticas agrícolas sustentáveis podem mitigar impactos sobre a biodiversidade. Qual alternativa ilustra uma prática recomendada?`, options:[
+  {id:'A5-Q4', aula:5, text:`Práticas agrícolas sustentáveis podem mitigar impactos sobre a biodiversidade. Qual alternativa ilustra uma prática recomendada?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Agricultura+Sustentável', options:[
     {label:'A', text:'Monocultura intensiva sem tutela ambiental.'},
     {label:'B', text:'Uso intensivo de pesticidas sem rotação de culturas.'},
     {label:'C', text:'Integração lavoura-pecuária-floresta (ILPF) e redução do uso de insumos por práticas agroecológicas.'},
     {label:'D', text:'Desmatamento para ampliar área cultivável.'}
   ]},
-  {id:'A5-Q5', aula:5, text:`A pesca predatória provoca colapso de populações. Uma gestão sustentável da pesca deve incluir:` , options:[
+  {id:'A5-Q5', aula:5, text:`A pesca predatória provoca colapso de populações. Uma gestão sustentável da pesca deve incluir:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Pesca+Sustentável', options:[
     {label:'A', text:'Licenças ilimitadas e sem monitoramento.'},
     {label:'B', text:'Cotas baseadas em dados científicos, áreas marinhas protegidas e fiscalização para evitar sobreexploração.'},
     {label:'C', text:'Proibição total de todo tipo de pesca sem alternativas econômicas.'},
     {label:'D', text:'Incentivo à pesca ilegal para aumentar oferta.'}
   ]},
-  {id:'A5-Q6', aula:5, text:`Projetos de restauração ecológica visam recuperar áreas degradadas. Qual alternativa descreve princípios fundamentais dessas ações?`, options:[
+  {id:'A5-Q6', aula:5, text:`Projetos de restauração ecológica visam recuperar áreas degradadas. Qual alternativa descreve princípios fundamentais dessas ações?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Restauração+Ecológica', options:[
     {label:'A', text:'Analisar as condições locais, usar espécies nativas, controlar invasoras e monitorar sucessão ecológica.'},
     {label:'B', text:'Importar espécies exóticas sem estudo prévio.'},
     {label:'C', text:'Queimar a área para facilitar plantio de exóticas.'},
     {label:'D', text:'Não realizar planejamento e agir por tentativa e erro.'}
   ]},
-  {id:'A5-Q7', aula:5, text:`Que papel têm corredores ecológicos na conservação da biodiversidade?`, options:[
+  {id:'A5-Q7', aula:5, text:`Que papel têm corredores ecológicos na conservação da biodiversidade?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Corredores+Ecológicos', options:[
     {label:'A', text:'Servem apenas para fins estéticos e não têm função ecológica.'},
     {label:'B', text:'Conectam populações fragmentadas, permitindo fluxo gênico e movimentação de espécies, reduzindo risco de extinção local.'},
     {label:'C', text:'São áreas de passagem apenas para turistas.'},
     {label:'D', text:'Impedem migrações naturais.'}
   ]},
-  {id:'A5-Q8', aula:5, text:`Tecnologias de monitoramento (sensoriamento remoto, câmeras, eDNA) ajudam na gestão da biodiversidade. Qual alternativa descreve vantagem principal dessa tecnologia?`, options:[
-    {label:'A', text:'Permite detecção e monitoramento não invasivo e contínuo, subsidando decisões de manejo com dados reais.'},
+  {id:'A5-Q8', aula:5, text:`Tecnologias de monitoramento (sensoriamento remoto, câmeras, eDNA) ajudam na gestão da biodiversidade. Qual alternativa descreve vantagem principal dessa tecnologia?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Monitoramento+Biodiversidade', options:[
+    {label:'A', text:'Permite detecção e monitoramento não invasivo e contínuo, subsidiando decisões de manejo com dados reais.'},
     {label:'B', text:'Substitui totalmente o olhar crítico do pesquisador.'},
     {label:'C', text:'Serve apenas para publicidade sem utilidade científica.'},
     {label:'D', text:'Diminui a necessidade de políticas públicas.'}
   ]},
-  {id:'A5-Q9', aula:5, text:`A educação ambiental é peça-chave para mudança de comportamento. Qual estratégia é mais provável de gerar impacto local duradouro?`, options:[
+  {id:'A5-Q9', aula:5, text:`A educação ambiental é peça-chave para mudança de comportamento. Qual estratégia é mais provável de gerar impacto local duradouro?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Educação+Ambiental', options:[
     {label:'A', text:'Programas escolares com projetos práticos, engajamento comunitário e atividades que conectem conhecimento à realidade local.'},
     {label:'B', text:'Distribuição de folhetos sem atividades práticas.'},
     {label:'C', text:'Campanhas únicas sem continuidade.'},
     {label:'D', text:'Medidas punitivas sem educação.'}
   ]},
-  {id:'A5-Q10', aula:5, text:`Para finalizar, identifique qual conjunto de ações agrega maior efeito positivo na proteção da biodiversidade em um município litorâneo:`, options:[
+  {id:'A5-Q10', aula:5, text:`Para finalizar, identifique qual conjunto de ações agrega maior efeito positivo na proteção da biodiversidade em um município litorâneo:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Proteção+Biodiversidade+Litoral', options:[
     {label:'A', text:'Combinação de unidades de conservação marinhas, fiscalização de pesca, saneamento básico e educação ambiental integrada.'},
     {label:'B', text:'Expansão de empreendimentos costeiros sem regulamentos.'},
     {label:'C', text:'Atividades que aumentem poluição e degradação de praias.'},
@@ -551,32 +572,52 @@ studentSelect.addEventListener('change',()=>{
   }
 });
 
-// ==================== RENDERIZAÇÃO DAS QUESTÕES (ORDEM E OPÇÕES ALEATÓRIAS) ====================
+// ==================== RENDERIZAÇÃO DAS QUESTÕES (10 QUESTÕES ALEATÓRIAS) ====================
 function renderQuestions(){
   const container = document.getElementById('questions');
   container.innerHTML = '';
-  // Shuffle questions order (para garantir mudanças a cada acesso)
-  const randomized = shuffleArray([...QUESTIONS]);
-  randomized.forEach(q=>{
-    // clone options to shuffle independently
-    const ops = q.options.map(o=>({label:o.label,text:o.text}));
-    shuffleArray(ops);
+  
+  // Selecionar 10 questões aleatórias do banco de 50
+  const selectedQuestions = shuffleArray([...QUESTIONS]).slice(0, 10);
+  
+  selectedQuestions.forEach((q, index)=>{
+    // Embaralhar as opções de cada questão
+    const ops = shuffleArray([...q.options]);
+    
     const div = document.createElement('div');
     div.className='q-surface';
     div.id='q-'+q.id;
-    div.innerHTML = `<div class="q-text"><strong>(${q.aula})</strong> ${escapeHtml(q.text)}</div>`;
+    
+    // Adicionar contador de questão
+    div.innerHTML = `<div class="question-counter">Questão ${index + 1} de 10</div>`;
+    
+    const qTextDiv = document.createElement('div');
+    qTextDiv.className = 'q-text';
+    qTextDiv.innerHTML = `<strong>(${q.aula})</strong> ${escapeHtml(q.text)}`;
+    div.appendChild(qTextDiv);
+    
+    // Adicionar imagem se disponível
+    if (q.imageUrl) {
+      const imageDiv = document.createElement('div');
+      imageDiv.className = 'question-image';
+      imageDiv.innerHTML = `<img src="${q.imageUrl}" alt="Imagem ilustrativa da questão"><div class="image-caption">Imagem relacionada à questão</div>`;
+      div.appendChild(imageDiv);
+    }
+    
     const optsDiv = document.createElement('div');
     optsDiv.className='options';
+    
     ops.forEach((op, idx)=>{
-      const optLabel = String.fromCharCode(65+idx); // A,B,C,D after shuffle
+      const optLabel = String.fromCharCode(65+idx); // A,B,C,D após embaralhamento
       const radioId = `${q.id}-${optLabel}`;
       const label = document.createElement('label');
       label.className='option';
       label.innerHTML = `<input type="radio" name="${q.id}" value="${op.label}" id="${radioId}" required> <strong>${optLabel}.</strong> ${escapeHtml(op.text)}`;
-      // store original label (the letter referring to real answer key) in data-* attribute
+      // Armazenar a letra original (referente ao gabarito) em um atributo data
       label.querySelector('input').dataset.origLabel = op.label;
       optsDiv.appendChild(label);
     });
+    
     div.appendChild(optsDiv);
     container.appendChild(div);
   });
@@ -586,27 +627,37 @@ function renderQuestions(){
 document.getElementById('submitBtn').addEventListener('click',async ()=>{
   const name = studentSelect.value;
   if(!name){ alert('Selecione seu nome antes de enviar.'); studentSelect.focus(); return; }
-  if(!SERVER_URL || SERVER_URL.includes('https://script.google.com/macros/s/AKfycbz5PfKu-UrMf2_S31Iz4cfz-f2A4tRaXV8JjkBAu7tmqs3msvIj0ODSieC3MGRNRqk/exec')){ alert('Configure a SERVER_URL com a URL do seu Web App (Apps Script) antes de enviar.'); return; }
-  // coletar respostas
+  if(!SERVER_URL || SERVER_URL.includes('COLE_AQUI_A_URL_DO_SEU_WEBAPP')){ 
+    alert('Configure a SERVER_URL com a URL do seu Web App (Apps Script) antes de enviar.'); 
+    return; 
+  }
+  
+  // Coletar respostas
   const responses = [];
-  for(const q of QUESTIONS){
-    const radios = document.getElementsByName(q.id);
+  const questionElements = document.querySelectorAll('.q-surface');
+  
+  for(const qElement of questionElements){
+    const qId = qElement.id.replace('q-', '');
+    const radios = document.querySelectorAll(`input[name="${qId}"]`);
     let chosen = null;
+    
     for(const r of radios){
       if(r.checked){
-        // enviamos o valor real associado à opção (origLabel, que corresponde às letras usadas no gabarito)
+        // Enviamos o valor real associado à opção (origLabel, que corresponde às letras usadas no gabarito)
         chosen = r.dataset.origLabel || r.value;
         break;
       }
     }
+    
     if(!chosen){
-      alert('Por favor, responda todas as questões antes de enviar. Questão faltando: ' + q.id);
+      alert('Por favor, responda todas as questões antes de enviar. Questão faltando: ' + qId);
       return;
     }
-    responses.push({id: q.id, answer: chosen});
+    
+    responses.push({id: qId, answer: chosen});
   }
 
-  // montar payload
+  // Montar payload
   const payload = {
     studentName: name,
     studentNumber: numeroInput.value || '',
@@ -616,7 +667,7 @@ document.getElementById('submitBtn').addEventListener('click',async ()=>{
     responses: responses
   };
 
-  // enviar para servidor e aguardar retorno
+  // Enviar para servidor e aguardar retorno
   document.getElementById('status').textContent = 'Enviando...';
   try {
     const res = await fetch(SERVER_URL, {
@@ -642,20 +693,33 @@ document.getElementById('submitBtn').addEventListener('click',async ()=>{
 function showFeedback(feedback){
   const area = document.getElementById('feedbackArea');
   area.innerHTML = '';
+  
   const heading = document.createElement('div');
-  heading.innerHTML = `<strong>Resultado: ${feedback.totalCorrect}/${feedback.totalQuestions} acertos</strong>`;
+  heading.innerHTML = `<div class="score-display"><strong>Resultado: ${feedback.totalCorrect}/${feedback.totalQuestions} acertos</strong></div>`;
   area.appendChild(heading);
+  
   const list = document.createElement('div');
   list.style.marginTop='8px';
+  
   feedback.perQuestion.forEach((pq, idx)=>{
     const qdiv = document.createElement('div');
     qdiv.style.marginBottom='8px';
-    const status = pq.correct ? '<span style="color:#0a6;">Correto</span>' : '<span style="color:#c33;">Incorreto</span>';
-    qdiv.innerHTML = `<strong>Questão ${idx+1} (${pq.id}):</strong> ${status} ${!pq.correct ? `<div style="margin-top:4px;background:#fff;padding:8px;border-radius:6px;color:#111;"><strong>Comentário:</strong> ${escapeHtml(pq.commentIfWrong)}</div>` : ''}`;
+    
+    // Encontrar a questão correspondente
+    const qElement = document.getElementById(`q-${pq.id}`);
+    const qText = qElement ? qElement.querySelector('.q-text').textContent : `Questão ${pq.id}`;
+    
+    const status = pq.correct ? '<span class="correct">✓ Correto</span>' : '<span class="incorrect">✗ Incorreto</span>';
+    qdiv.innerHTML = `<strong>Questão ${idx+1}:</strong> ${status} ${!pq.correct ? `<div style="margin-top:4px;background:#fff;padding:8px;border-radius:6px;color:#111;"><strong>Comentário:</strong> ${escapeHtml(pq.commentIfWrong)}</div>` : ''}`;
+    
     list.appendChild(qdiv);
   });
+  
   area.appendChild(list);
   area.classList.remove('hide');
+  
+  // Scroll para o resultado
+  area.scrollIntoView({ behavior: 'smooth' });
 }
 
 // ==================== LIMPAR ====================
@@ -669,11 +733,10 @@ document.getElementById('clearBtn').addEventListener('click',()=>{
 // Inicialização
 (function init(){
   populateStudents();
-  // preenche data com hoje
+  // Preenche data com hoje
   document.getElementById('data').value = (new Date()).toISOString().slice(0,10);
   renderQuestions();
 })();
 </script>
 </body>
 </html>
-
