@@ -116,7 +116,7 @@
  * 1) COLE AQUI A URL DO SEU WEB APP DO APPS SCRIPT (obtida ao publicar o Apps Script)
  * 2) NÃO coloque o gabarito no cliente — o servidor fará a correção.
  */
-const SERVER_URL = 'COLE_AQUI_A_URL_DO_SEU_WEBAPP';
+const SERVER_URL = 'https://script.google.com/macros/s/AKfycbxR_C5UZk0yIM5L5X1cj8c5COmh_9FaVNtICDAfpMhUlSe8K2yKq_UcsQPMOcS9xSg/exec';
 
 // ==================== DADOS DOS ALUNOS (conforme sua lista) ====================
 // Estrutura: {name, number, serie, email}
@@ -627,7 +627,7 @@ function renderQuestions(){
 document.getElementById('submitBtn').addEventListener('click',async ()=>{
   const name = studentSelect.value;
   if(!name){ alert('Selecione seu nome antes de enviar.'); studentSelect.focus(); return; }
-  if(!SERVER_URL || SERVER_URL.includes('COLE_AQUI_A_URL_DO_SEU_WEBAPP')){ 
+  if(!SERVER_URL || SERVER_URL.includes('https://script.google.com/macros/s/AKfycbxR_C5UZk0yIM5L5X1cj8c5COmh_9FaVNtICDAfpMhUlSe8K2yKq_UcsQPMOcS9xSg/exec')){ 
     alert('Configure a SERVER_URL com a URL do seu Web App (Apps Script) antes de enviar.'); 
     return; 
   }
@@ -740,4 +740,5 @@ document.getElementById('clearBtn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
 
