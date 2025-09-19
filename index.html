@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Atividade de Biologia — Revisão dos Temas</title>
+<title>Atividade de Biologia — Revisão Contextualizada</title>
 <style>
   :root{
     --silver:#c0c0c0;
@@ -76,7 +76,7 @@
 <div class="container">
   <div class="header-surface">
     <div class="header-top">
-      <div class="school">E.E. PROFª WANDA MASCAGNI DE SÁ</div>
+      <div class="school">E.E. LYDIAKITZ MOREIRA</div>
       <div class="meta">
         <div class="field"><label>NOME:</label>
           <select id="studentSelect" aria-label="Selecione o nome do aluno"></select>
@@ -89,7 +89,7 @@
     </div>
     <div class="centered-title">
       <h1>ATIVIDADE DE BIOLOGIA (3ºBIMESTRE)</h1>
-      <h2>"REVISÃO DOS TEMAS"</h2>
+      <h2>"REVISÃO DOS TEMAS" - 10 QUESTÕES SORTEADAS</h2>
     </div>
     <div class="small">Observação: as respostas serão enviadas automaticamente para a planilha institucional após confirmação.</div>
   </div>
@@ -116,7 +116,7 @@
  * 1) COLE AQUI A URL DO SEU WEB APP DO APPS SCRIPT (obtida ao publicar o Apps Script)
  * 2) NÃO coloque o gabarito no cliente — o servidor fará a correção.
  */
-const SERVER_URL = 'https://script.google.com/macros/s/AKfycbxR_C5UZk0yIM5L5X1cj8c5COmh_9FaVNtICDAfpMhUlSe8K2yKq_UcsQPMOcS9xSg/exec';
+const SERVER_URL = 'COLE_AQUI_A_URL_DO_SEU_WEBAPP';
 
 // ==================== DADOS DOS ALUNOS (conforme sua lista) ====================
 // Estrutura: {name, number, serie, email}
@@ -221,313 +221,313 @@ const STUDENTS = [
 // Cada questão: { id, aula, text, options: [ {label:'A', text: '...'}, ... ], imageUrl (opcional) }
 const QUESTIONS = [
   // Aula 1 - Adaptação e Especiação (A1-Q1..A1-Q10)
-  {id:'A1-Q1', aula:1, text:`Considere dois agrupamentos de coelhos: um vive em uma floresta tropical densa e úmida; outro em um deserto árido. Observando as pressões ambientais (temperatura, disponibilidade de água, predadores e vegetação), analise o enunciado abaixo e escolha a alternativa que descreve com maior precisão as adaptações morfológicas e comportamentais que seriam favorecidas por seleção natural em cada ambiente.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Coelhos+Floresta+e+Deserto', options:[
-    {label:'A', text:'Coelhos da floresta desenvolvem pêlo claro para refletir calor; coelhos do deserto desenvolvem membranas interdigitais para nadar.'},
-    {label:'B', text:'Na floresta, seleção favoreceria camuflagem e agilidade para escapar de predadores; no deserto, favoreceria capacidade de conservar água (fisiológica) e atividade crepuscular/nocturna (comportamental).'},
-    {label:'C', text:'Ambos os grupos tenderiam a reduzir o tamanho corporal por igual, já que menor porte é sempre vantajoso em qualquer habitat.'},
-    {label:'D', text:'A única adaptação esperada no deserto seria o desenvolvimento de asas para migração.'}
+  {id:'A1-Q1', aula:1, text:`Na região amazônica, pesquisadores observaram que diferentes populações de macacos-prego desenvolveram técnicas distintas para quebrar castanhas. Alguns usam pedras como martelos, enquanto outros usam troncos como bigornas. Este exemplo ilustra principalmente:`, imageUrl: 'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Adaptação comportamental a recursos disponíveis no ambiente.'},
+    {label:'B', text:'Seleção artificial promovida por humanos.'},
+    {label:'C', text:'Evolução convergente entre espécies distintas.'},
+    {label:'D', text:'Mutação genética direcionada para uso de ferramentas.'}
   ]},
-  {id:'A1-Q2', aula:1, text:`A definição de adaptação pode ser morfológica, fisiológica ou comportamental. A seguir há uma lista de exemplos. Identifique a alternativa que classifica corretamente cada exemplo: (1) Bico especializado de beija-flor; (2) Capacidade de um cacto armazenar água; (3) Migração de aves em busca de alimento.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Beija-flor+Cacto+Migração', options:[
-    {label:'A', text:'(1) comportamental; (2) morfológica; (3) fisiológica.'},
-    {label:'B', text:'(1) morfológica; (2) fisiológica; (3) comportamental.'},
-    {label:'C', text:'(1) fisiológica; (2) comportamental; (3) morfológica.'},
-    {label:'D', text:'(1) morfológica; (2) comportamental; (3) fisiológica.'}
+  {id:'A1-Q2', aula:1, text:`Na aula sobre especiação, discutimos o caso dos tentilhões de Darwin nas Ilhas Galápagos. O que o formato diferente dos bicos dessas aves em ilhas diferentes nos ensina sobre adaptação?`, imageUrl: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que características morfológicas podem evoluir em resposta aos diferentes alimentos disponíveis em cada ambiente.'},
+    {label:'B', text:'Que todas as aves desenvolverão bicos idênticos independentemente do ambiente.'},
+    {label:'C', text:'Que o formato do bico é determinado exclusivamente por mutações aleatórias sem relação com o ambiente.'},
+    {label:'D', text:'Que a especiação sempre ocorre apenas por isolamento geográfico.'}
   ]},
-  {id:'A1-Q3', aula:1, text:`Imagine que uma população de peixes migrou para um novo lago isolado e, ao longo de muitas gerações, passou a exibir diferenças de cor e comportamento de acasalamento em relação à população original. Esse cenário ilustra principalmente qual processo evolutivo e por qual mecanismo?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Peixes+Isolamento+Geográfico', options:[
-    {label:'A', text:'Especiação por isolamento geográfico (alopátrica), decorrente da interrupção do fluxo gênico e de pressões seletivas distintas no novo ambiente.'},
-    {label:'B', text:'Evolução convergente, porque as cores mudaram devido a fatores semelhantes.'},
-    {label:'C', text:'Fixismo, pois as espécies permanencem inalteradas a não ser por intervenção humana.'},
-    {label:'D', text:'Apenas um exemplo de mutação sem importância adaptativa.'}
+  {id:'A1-Q3', aula:1, text:`Em uma aula prática, observamos que plantas do mesmo gênero apresentam folhas de tamanhos diferentes quando cultivadas em ambientes mais secos versus ambientes mais úmidos. Esta observação está relacionada a qual conceito estudado?`, imageUrl: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Adaptações morfológicas para reduzir a perda de água em ambientes áridos.'},
+    {label:'B', text:'Seleção sexual que favorece folhas menores.'},
+    {label:'C', text:'Deriva genética que ocorre igualmente em todos os ambientes.'},
+    {label:'D', text:'Evolução convergente entre espécies não relacionadas.'}
   ]},
-  {id:'A1-Q4', aula:1, text:`Com base no conceito biológico de espécie de Ernst Mayr, avalie a seguinte afirmativa: "Duas populações que não são capazes de produzir descendentes férteis entre si são consideradas espécies diferentes." Analise as implicações desse conceito para o estudo da biodiversidade e escolha a alternativa que apresenta a melhor justificativa prática.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Isolamento+Reprodutivo', options:[
-    {label:'A', text:'O conceito é inútil porque a esterilidade não ocorre na natureza.'},
-    {label:'B', text:'O conceito é útil apenas para plantas, não para animais.'},
-    {label:'C', text:'O conceito ajuda a identificar barreiras reprodutivas, mas pode ser limitado em organismos assexuados ou com hibridação frequente.'},
-    {label:'D', text:'O conceito implica que qualquer diferença morfológica define espécies distintas.'}
+  {id:'A1-Q4', aula:1, text:`Durante nossa aula de campo no jardim da escola, observamos que abelhas de diferentes espécies visitam flores específicas. Algumas só coletam néctar de flores tubulares, enquanto outras preferem flores abertas. Isto demonstra:`, imageUrl: 'https://images.unsplash.com/photo-1586942356970-6c3032e8ccf8?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Coevolução entre plantas e polinizadores, onde características específicas se desenvolvem em resposta mútua.'},
+    {label:'B', text:'Seleção artificial realizada por apicultores.'},
+    {label:'C', text:'Competição intraespecífica por recursos alimentares.'},
+    {label:'D', text:'Mutação genética idêntica em diferentes espécies de abelhas.'}
   ]},
-  {id:'A1-Q5', aula:1, text:`No gráfico hipotético abaixo (imagine uma curva que mostra frequência de um alelo ao longo de gerações em duas populações separadas por uma barreira), observa-se que uma variante aumenta em frequência em uma população e diminui na outra. Essa diferença pode decorrer de qual mecanismo evolutivo com maior probabilidade?`, imageUrl: 'https://via.placeholder.com/600x300?text=Gráfico+Fluxo+Gênico', options:[
-    {label:'A', text:'Fluxo gênico intenso entre as populações, mantendo-as homogêneas.'},
-    {label:'B', text:'Interrupção do fluxo gênico após isolamento, seguida de seleção natural divergente e deriva genética.'},
-    {label:'C', text:'Fixismo genético que impede mudanças.'},
-    {label:'D', text:'Migração constante de indivíduos entre as populações, nivelando as frequências.'}
+  {id:'A1-Q5', aula:1, text:`Em nossa discussão sobre isolamento reprodutivo, analisamos o caso de duas populações de sapos que não conseguem mais se cruzar, embora vivam na mesma região. Qual dos seguintes mecanismos poderia explicar esta situação?`, imageUrl: 'https://images.unsplash.com/photo-1559253664-ca249d4608c6?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Isolamento comportamental, onde os rituais de acasalamento se tornaram incompatíveis.'},
+    {label:'B', text:'Deriva genética que afeta igualmente ambas as populações.'},
+    {label:'C', text:'Fluxo gênico intenso entre as populações.'},
+    {label:'D', text:'Seleção estabilizadora que mantém as características originais.'}
   ]},
-  {id:'A1-Q6', aula:1, text:`Considere dois lagos separados por uma cordilheira: um lago frio de altitude e outro quente em planície. Ao longo de milhões de anos, populações de um peixe que ocuparam ambos os lagos desenvolveram diferenças reprodutivas. Esse é um exemplo clássico de:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Especiação+Alopátrica', options:[
-    {label:'A', text:'Especiação alopátrica, pois a barreira física gerar isolamento reprodutivo ao longo do tempo.'},
-    {label:'B', text:'Evolução convergente, porque ambos os peixes mantiveram as mesmas características.'},
-    {label:'C', text:'Fixismo, já que não houve mudança real.'},
-    {label:'D', text:'Seleção artificial promovida por humanos.'}
+  {id:'A1-Q6', aula:1, text:`Ao estudarmos a história evolutiva dos cavalos, observamos que suas patas foram se modificando ao longo do tempo, com redução no número de dedos. Esta mudança está relacionada a:`, imageUrl: 'https://images.unsplash.com/photo-1596733430284-f7437764b1a9?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Adaptação para correr mais eficientemente em terrenos abertos.'},
+    {label:'B', text:'Seleção sexual que preferia animais com menor número de dedos.'},
+    {label:'C', text:'Mutação genética aleatória sem valor adaptativo.'},
+    {label:'D', text:'Evolução convergente com outros ungulados.'}
   ]},
-  {id:'A1-Q7', aula:1, text:`Qual das alternativas apresenta corretamente uma adaptação fisiológica que ajudaria um vegetal a sobreviver em ambiente árido?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Adaptação+Plantas+Áridas', options:[
-    {label:'A', text:'Folíolos delgados e pouca capacidade de armazenar água.'},
-    {label:'B', text:'Raízes superficiais que evitam captar água.'},
-    {label:'C', text:'Capacidade de armazenar água nos tecidos e metabolismo CAM para reduzir perda de água.'},
-    {label:'D', text:'Produção de flores grandes sem relação com polinização.'}
+  {id:'A1-Q7', aula:1, text:`Em uma atividade prática, comparamos ouriços-do-mar de diferentes profundidades oceânicas. Os que vivem em águas mais profundas apresentam espinhos mais longos e corpo mais achatado. Isto provavelmente representa:`, imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Adaptações à pressão hidrostática e disponibilidade de recursos em diferentes profundidades.'},
+    {label:'B', text:'Variação intraespecífica sem significado adaptativo.'},
+    {label:'C', text:'Resultado de hibridização entre espécies diferentes.'},
+    {label:'D', text:'Efeito de poluentes no desenvolvimento embrionário.'}
   ]},
-  {id:'A1-Q8', aula:1, text:`Analise a afirmativa: "Se uma barreira geográfica desaparecer, populações isoladas sempre se hibridizam novamente formando uma única população." Com base em conceitos de isolamento reprodutivo, avalie a alternativa correta.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Hibridação', options:[
-    {label:'A', text:'Verdadeiro — barreiras removidas garantem sempre fluxo gênico total.'},
-    {label:'B', text:'Verdadeiro — seleção natural sempre faz as populações voltarem a ser idênticas.'},
-    {label:'C', text:'Falso — diferenças acumuladas podem prevenir cruzamentos ou gerar híbridos estéreis.'},
-    {label:'D', text:'Falso — pois espécies são definidas apenas por características morfológicas.'}
+  {id:'A1-Q8', aula:1, text:`Durante nossa visita ao zoológico, observamos que animais noturnos como corujas e morcegos apresentam sentidos aguçados na escuridão. Esta característica é principalmente resultado de:`, imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Seleção natural que favoreceu indivíduos com melhor adaptação à vida noturna.'},
+    {label:'B', text:'Seleção artificial realizada por tratadores do zoológico.'},
+    {label:'C', text:'Mutação genética recente induzida pela poluição luminosa.'},
+    {label:'D', text:'Deriva genética em populações isoladas.'}
   ]},
-  {id:'A1-Q9', aula:1, text:`Explique por que mutações aleatórias podem levar a adaptações vantajosas e, consequentemente, ao aumento de frequência desses traços em uma população. Escolha a alternativa que descreve corretamente esse processo.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Mutações+Seleção+Natural', options:[
-    {label:'A', text:'Mutação gera variação; se um traço confere vantagem reprodutiva, a seleção natural aumenta sua frequência ao longo de gerações.'},
-    {label:'B', text:'Mutação é sempre prejudicial e reduz a chance de sobrevivência.'},
-    {label:'C', text:'Mutações aparecem apenas quando necessárias e sob controle consciente dos organismos.'},
-    {label:'D', text:'Mutações não têm relação nenhuma com adaptação.'}
+  {id:'A1-Q9', aula:1, text:`Em nossa discussão sobre a formação de novas espécies na sala de aula, analisamos o caso dos peixes ciclídeos nos lagos africanos. A diversificação desses peixes está relacionada a:`, imageUrl: 'https://images.unsplash.com/photo-1560275619-4664e5b2bf4d?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Isolamento em diferentes nichos ecológicos dentro do mesmo lago, levando à especiação simpátrica.'},
+    {label:'B', text:'Migração constante entre diferentes lagos, mantendo o fluxo gênico.'},
+    {label:'C', text:'Seleção estabilizadora que mantém as características originais.'},
+    {label:'D', text:'Pressões seletivas idênticas em todos os lagos da região.'}
   ]},
-  {id:'A1-Q10', aula:1, text:`Com base no PDF (aula sobre especiação), descreva o papel do fluxo gênico no contexto da especiação e escolha a alternativa que resume corretamente seu efeito.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Fluxo+Gênico', options:[
-    {label:'A', text:'O fluxo gênico conecta populações geneticamente; quando interrompido, permite divergência genética e especiação.'},
-    {label:'B', text:'Fluxo gênico impede que populações se adaptem a ambientes diferentes.'},
-    {label:'C', text:'Fluxo gênico é um processo que apenas aumenta a diversidade dentro de um indivíduo.'},
-    {label:'D', text:'Fluxo gênico atua apenas em organismos unicelulares.'}
+  {id:'A1-Q10', aula:1, text:`Ao estudarmos a história evolutiva humana, discutimos como a tolerância à lactose em adultos evoluiu em populações com tradição de pastoreio. Este é um exemplo de:`, imageUrl: 'https://images.unsplash.com/photo-1577229908770-4d987b9a28c1?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Adaptação fisiológica a uma nova fonte alimentar.'},
+    {label:'B', text:'Deriva genética aleatória em populações humanas.'},
+    {label:'C', text:'Evolução convergente com outras espécies de mamíferos.'},
+    {label:'D', text:'Seleção sexual baseada em preferências culturais.'}
   ]},
 
   // Aula 2 - Evolução convergente/divergente (A2-Q1..A2-Q10)
-  {id:'A2-Q1', aula:2, text:`Observe um cladograma hipotético onde dois grupos distantes possuem uma estrutura semelhante (por exemplo, corpo hidrodinâmico). Qual conclusão sobre origem dessa estrutura é a mais coerente?`, imageUrl: 'https://via.placeholder.com/600x300?text=Cladograma+Evolução+Convergente', options:[
-    {label:'A', text:'A estrutura necessariamente veio de um ancestral muito próximo.'},
-    {label:'B', text:'A semelhança indica que os grupos são a mesma espécie.'},
-    {label:'C', text:'Provavelmente trata-se de evolução convergente: pressões ambientais semelhantes geraram característica análoga em ramos distintos.'},
-    {label:'D', text:'Pode ser atribuída ao fixismo.'}
+  {id:'A2-Q2', aula:2, text:`Em nossa aula sobre evolução, comparamos as asas de morcegos, aves e insetos. Apesar de cumprirem função semelhante (voar), elas possuem origens embriológicas diferentes. Isto caracteriza um caso de:`, imageUrl: 'https://images.unsplash.com/photo-1571771014-14e240a6cbc4?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Evolução convergente, onde estruturas análogas surgem independentemente em linhagens diferentes.'},
+    {label:'B', text:'Evolução divergente, onde estruturas homólogas se modificam para funções diferentes.'},
+    {label:'C', text:'Seleção estabilizadora que mantém a mesma função em diferentes grupos.'},
+    {label:'D', text:'Deriva genética que afeta o desenvolvimento embrionário.'}
   ]},
-  {id:'A2-Q2', aula:2, text:`Defina sinapomorfia e relacione-a a um grupo monofilético. Escolha a alternativa que exemplifique corretamente esses conceitos.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Sinapomorfia', options:[
-    {label:'A', text:'Sinapomorfia é uma característica ancestral compartilhada por todos os organismos.'},
-    {label:'B', text:'Sinapomorfia é uma característica derivada compartilhada por todos os membros de um grupo que define um clado monofilético.'},
-    {label:'C', text:'Sinapomorfia é qualquer característica que surge independentemente em ramos distintos.'},
-    {label:'D', text:'Sinapomorfia significa que duas espécies não possuem relação evolutiva.'}
+  {id:'A2-Q2', aula:2, text:`Durante a análise de fósseis na aula de paleontologia, observamos que tanto ictiossauros (répteis marinhos extintos) quanto golfinhos (mamíferos) desenvolveram forma hidrodinâmica semelhante. Isto é um exemplo clássico de:`, imageUrl: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Evolução convergente, resultante de adaptações a ambientes aquáticos semelhantes.'},
+    {label:'B', text:'Evolução divergente a partir de um ancestral comum recente.'},
+    {label:'C', text:'Hibridização entre espécies de diferentes classes.'},
+    {label:'D', text:'Seleção sexual que preferia formas aerodinâmicas.'}
   ]},
-  {id:'A2-Q3', aula:2, text:`Combinações abaixo explicam corretamente a diferença entre estruturas análogas e homólogas. Marque a alternativa correta.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Estruturas+Homólogas+e+Análogas', options:[
-    {label:'A', text:'Análogas: mesmas origens, mesmas funções; Homólogas: origens diferentes, funções iguais.'},
-    {label:'B', text:'Análogas: diferentes funções; Homólogas: mesmas funções.'},
-    {label:'C', text:'Análogas: mesmas funções, origens evolutivas distintas (ex.: asas de insetos e aves); Homólogas: mesma origem, funções que podem divergir (ex.: membros de mamíferos).'},
-    {label:'D', text:'Não existe diferença entre elas.'}
+  {id:'A2-Q3', aula:2, text:`Em nosso estudo sobre a flora brasileira, observamos que cactos do Brasil e euforbiáceas da África desenvolveram estruturas semelhantes (caules suculentos e espinhos) para armazenar água e se proteger. Isto ilustra:`, imageUrl: 'https://images.unsplash.com/photo-1595436006484-3354ce3b2d3e?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Evolução convergente em resposta a pressões ambientais semelhantes em continentes diferentes.'},
+    {label:'B', text:'Migração recente de espécies entre continentes.'},
+    {label:'C', text:'Seleção artificial realizada por agricultores.'},
+    {label:'D', text:'Deriva genética que afetou desenvolvimento vegetal.'}
   ]},
-  {id:'A2-Q4', aula:2, text:`No cladograma que representa nadadeiras caudais, Teleostei apresenta nadadeira homocerca, enquanto outros grupos possuem heterocerca. O que isso indica sobre Teleostei?`, imageUrl: 'https://via.placeholder.com/600x300?text=Cladograma+Nadadeiras', options:[
-    {label:'A', text:'Teleostei possui característica derivada (homocerca) que define um grupo monofilético dentro do cladograma.'},
-    {label:'B', text:'Teleostei é grupo artificial sem significado evolutivo.'},
-    {label:'C', text:'Teleostei é ancestral de todos os peixes cartilaginosos.'},
-    {label:'D', text:'Teleostei não está relacionado aos outros peixes.'}
+  {id:'A2-Q4', aula:2, text:`Ao compararmos os olhos de polvos e humanos na aula de anatomia comparada, observamos que, apesar de serem estruturas complexas semelhantes, elas evoluíram independentemente. Isto demonstra:`, imageUrl: 'https://images.unsplash.com/photo-1597007234779-7e283f9035d4?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que a evolução convergente pode produzir soluções semelhantes para problemas visuais comuns.'},
+    {label:'B', text:'Que polvos e humanos compartilham um ancestral comum com olhos complexos.'},
+    {label:'C', text:'Que mutações idênticas ocorreram independentemente nestas linhagens.'},
+    {label:'D', text:'Que a seleção sexual preferiu olhos semelhantes em ambas as espécies.'}
   ]},
-  {id:'A2-Q5', aula:2, text:`Ao interpretar um cladograma, qual é a função de um nó (node) e o que ele representa?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Nó+Cladograma', options:[
-    {label:'A', text:'Um nó representa um indivíduo específico em tempo presente.'},
-    {label:'B', text:'Um nó indica uma barreira geográfica.'},
-    {label:'C', text:'Um nó representa o ancestral comum mais recente compartilhado entre dois ramos.'},
-    {label:'D', text:'Um nó é apenas elemento visual sem significado.'}
+  {id:'A2-Q5', aula:2, text:`Em nossa aula sobre biogeografia, discutimos como tatus e pangolins, apesar de não serem parentes próximos, desenvolveram armaduras corporais semelhantes. Isto é um exemplo de:`, imageUrl: 'https://images.unsplash.com/photo-1613082442324-62b7e59d5e6e?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Evolução convergente em resposta à pressão de predadores.'},
+    {label:'B', text:'Evolução divergente a partir de um ancestral comum com armadura.'},
+    {label:'C', text:'Seleção artificial para produção de couraças.'},
+    {label:'D', text:'Deriva genética em populações isoladas.'}
   ]},
-  {id:'A2-Q6', aula:2, text:`Analise as alternativas sobre características ancestrais x derivadas e marque a correta.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Características+Ancestrais+Derivadas', options:[
-    {label:'A', text:'Características ancestrais surgem em ramos distintos devido à convergência.'},
-    {label:'B', text:'Características derivadas (apomorfias) surgem após um nó e podem definir grupos monofiléticos.'},
-    {label:'C', text:'Características análogas são sempre derivadas.'},
-    {label:'D', text:'Características ancestrais e derivadas são termos intercambiáveis.'}
+  {id:'A2-Q6', aula:2, text:`Durante a análise de cladogramas em sala, observamos que golfinhos e morcegos compartilham a ecolocalização, mas esta característica evoluiu independentemente em cada grupo. Isto nos ensina que:`, imageUrl: 'https://images.unsplash.com/photo-1566272245286-33182abc5d7e?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'A ecolocalização é uma adaptação convergente para orientação em ambientes com pouca visibilidade.'},
+    {label:'B', text:'Golfinhos e morcegos compartilham um ancestral comum recente com ecolocalização.'},
+    {label:'C', text:'A ecolocalização é uma característica ancestral de todos os mamíferos.'},
+    {label:'D', text:'Esta característica surgiu por hibridização entre espécies.'}
   ]},
-  {id:'A2-Q7', aula:2, text:`Considerando seleção artificial em pombos que originou raças com diferenças marcantes (papo inflado, cauda em leque), esse processo ilustra:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Seleção+Artificial+Pombos', options:[
-    {label:'A', text:'Evolução convergente natural.'},
-    {label:'B', text:'Fixismo por seleção natural.'},
-    {label:'C', text:'Deriva genética sem intervenção.'},
-    {label:'D', text:'Divergência evolutiva via seleção artificial a partir de um ancestral comum.'}
+  {id:'A2-Q7', aula:2, text:`Em nosso estudo sobre a flora de restinga, observamos que plantas de diferentes famílias desenvolveram características semelhantes como folhas coriáceas e sistemas radiculares profundos. Isto representa:`, imageUrl: 'https://images.unsplash.com/photo-1594736797933-d0401ba94693?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Adaptações convergentes às condições de solo arenoso, vento forte e alta insolação.'},
+    {label:'B', text:'Resultado de polinização cruzada entre espécies diferentes.'},
+    {label:'C', text:'Seleção artificial para jardins ornamentais.'},
+    {label:'D', text:'Deriva genética em populações isoladas.'}
   ]},
-  {id:'A2-Q8', aula:2, text:`A presença de nadadeira homocerca em Teleostei é um exemplo de sinapomorfia. O que isso implica na construção de grupos no cladograma?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Sinapomorfia+Nadadeira', options:[
-    {label:'A', text:'Que a nadadeira homocerca é uma característica ancestral para todos os vertebrados.'},
-    {label:'B', text:'Que Teleostei não compartilha ancestrais com outros peixes.'},
-    {label:'C', text:'Que a presença de nadadeira homocerca define um clado monofilético dentro do conjunto analisado.'},
-    {label:'D', text:'Nada pode ser inferido a partir dessa informação.'}
+  {id:'A2-Q8', aula:2, text:`Na aula sobre marsupiais e placentários, comparamos o lobo-da-tasmânia (extinto) com o lobo-cinzento norte-americano. A semelhança entre eles é um exemplo clássico de:`, imageUrl: 'https://images.unsplash.com/photo-1543946608-3b7eb875d41a?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Evolução convergente em continentes diferentes para nichos de predação similares.'},
+    {label:'B', text:'Migração recente entre a Austrália e a América do Norte.'},
+    {label:'C', text:'Hibridização entre marsupiais e placentários.'},
+    {label:'D', text:'Seleção sexual que preferia a mesma forma corporal.'}
   ]},
-  {id:'A2-Q9', aula:2, text:`Qual das alternativas abaixo melhor descreve a evolução convergente?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Evolução+Convergente', options:[
-    {label:'A', text:'Organismos com ancestral comum recente se tornam parecidos por seleção sexual.'},
-    {label:'B', text:'Apenas organismos aquáticos se tornam hidrodinâmicos.'},
-    {label:'C', text:'Organismos de linhagens diferentes desenvolvem características semelhantes por pressões ambientais parecidas, sem ancestral comum recente.'},
-    {label:'D', text:'Todos os casos de similaridade indican parentesco próximo.'}
+  {id:'A2-Q9', aula:2, text:`Ao estudarmos a herpetofauna do Cerrado e da Caatinga, observamos que lagartos de diferentes famílias desenvolveram adaptações similares para economizar água. Isto ilustra:`, imageUrl: 'https://images.unsplash.com/photo-1567176128201-2c4e0802ee1f?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Evolução convergente em resposta a ambientes semiáridos.'},
+    {label:'B', text:'Evolução divergente a partir de um ancestral comum adaptado à aridez.'},
+    {label:'C', text:'Seleção artificial para criação em cativeiro.'},
+    {label:'D', text:'Deriva genética em populações pequenas.'}
   ]},
-  {id:'A2-Q10', aula:2, text:`Ao analisar um cladograma, você nota que uma característica aparece em ramos distintos sem estar presente no nó ancestral. Tal padrão é evidência de:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Evolução+Convergente+Cladograma', options:[
-    {label:'A', text:'Sinapomorfia compartilhada.'},
-    {label:'B', text:'Característica ancestral universal.'},
-    {label:'C', text:'Evolução convergente/independente (apomorfia surgida separadamente).'},
-    {label:'D', text:'Erro no desenho do cladograma; tais padrões não ocorrem.'}
+  {id:'A2-Q10', aula:2, text:`Em nossa discussão sobre a vida em cavernas, observamos que peixes e crustáceos de diferentes linhagens desenvolveram características similares como ausência de pigmentação e olhos atrofiados. Isto demonstra:`, imageUrl: 'https://images.unsplash.com/photo-1590956720896-50e11f633122?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Evolução convergente em resposta à escuridão permanente das cavernas.'},
+    {label:'B', text:'Que todas as espécies de cavernas compartilham um ancestral comum recente.'},
+    {label:'C', text:'Seleção sexual que preferia indivíduos sem pigmentação.'},
+    {label:'D', text:'Efeito de poluentes no desenvolvimento embrionário.'}
   ]},
 
   // Aula 3 - Evidências da Evolução (A3-Q1..A3-Q10)
-  {id:'A3-Q1', aula:3, text:`Os fósseis de transição (por exemplo, Archaeopteryx) são considerados evidências importantes da evolução. Explique por que fósseis de transição suportam a ideia de transformações graduais entre grupos.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Fóssil+Transição', options:[
-    {label:'A', text:'Porque mostram combinações de características de dois grupos distintos, indicando estados intermediários ao longo do tempo.'},
-    {label:'B', text:'Porque provam que todas as espécies surgem instantaneamente.'},
-    {label:'C', text:'Porque indicam que espécies híbridas dominavam o passado.'},
-    {label:'D', text:'Porque sempre preservam DNA completo das espécies extintas.'}
+  {id:'A3-Q1', aula:3, text:`Durante nossa visita ao museu, observamos fósseis de Archaeopteryx, que apresenta características tanto de répteis quanto de aves. Qual a importância deste fóssil para a Teoria da Evolução?`, imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Representa uma forma transicional que sustenta a ideia de que aves evoluíram de dinossauros terópodes.'},
+    {label:'B', text:'Comprova que répteis e aves não possuem relação evolutiva.'},
+    {label:'C', text:'Demonstra que mutações aleatórias podem criar estruturas completamente novas.'},
+    {label:'D', text:'Indica que a evolução ocorre através de saltos grandes e abruptos.'}
   ]},
-  {id:'A3-Q2', aula:3, text:`A datação por carbono-14 é útil para estimar idades de materiais orgânicos. Qual é a limitação principal dessa técnica em estudos paleontológicos?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Datação+Carbono', options:[
-    {label:'A', text:'A meia-vida do carbono-14 (~5.730 anos) limita o método a materiais relativamente recentes (até ~50 mil anos), sendo inadequado para fósseis muito antigos.'},
-    {label:'B', text:'O método funciona apenas em rochas ígneas.'},
-    {label:'C', text:'Carbono-14 é produzido apenas em laboratório.'},
-    {label:'D', text:'Não existe limitação; é aplicável a qualquer época.'}
+  {id:'A3-Q2', aula:3, text:`Em nossa aula de embriologia comparada, observamos que embriões de vertebrados apresentam estruturas similares em estágios iniciais, como fendas faríngeas. Isto sugere:`, imageUrl: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que vertebrados compartilham um ancestral comum, mantendo padrões de desenvolvimento similares.'},
+    {label:'B', text:'Que todos os vertebrados são, na verdade, a mesma espécie.'},
+    {label:'C', text:'Que o desenvolvimento embrionário não fornece informações sobre relações evolutivas.'},
+    {label:'D', text:'Que estas estruturas são resultado de adaptações recentes ao ambiente aquático.'}
   ]},
-  {id:'A3-Q3', aula:3, text:`Semelhanças embrionárias entre vertebrados (ex.: presença de fendas branquiais em embriões) são interpretadas como evidência de:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Embriologia+Comparada', options:[
-    {label:'A', text:'Homologias no desenvolvimento indicando um ancestral comum e padrões conservados de desenvolvimento.'},
-    {label:'B', text:'Evolução convergente de embriões entre espécies sem relação.'},
-    {label:'C', text:'Um erro de observação sem significado evolutivo.'},
-    {label:'D', text:'Que embriões representam espécies adultas em miniatura.'}
+  {id:'A3-Q3', aula:3, text:`Ao analisarmos a anatomia comparada de diferentes mamíferos, observamos que embora os membros dianteiros tenham funções diferentes (asas em morcegos, nadadeiras em baleias, patas em cavalos), sua estrutura óssea básica é similar. Isto indica:`, imageUrl: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que estes animais compartilham um ancestral comum com essa estrutura básica, que foi modificada para diferentes funções.'},
+    {label:'B', text:'Que a evolução convergente produziu estruturas idênticas em diferentes linhagens.'},
+    {label:'C', text:'Que mutações aleatórias tendem a produzir os mesmos resultados em espécies diferentes.'},
+    {label:'D', text:'Que a seleção sexual preferiu a mesma estrutura em todos os mamíferos.'}
   ]},
-  {id:'A3-Q4', aula:3, text:`A análise de DNA entre humanos e chimpanzés mostra alta similaridade (~98%). Qual inferência evolutiva é mais adequada a partir dessa informação?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+DNA+Humano+Chimpanzé', options:[
-    {label:'A', text:'Humano e chimpanzé compartilham um ancestral comum relativamente recente; alto nível de similaridade genética confirma parentesco.'},
-    {label:'B', text:'Humano evoluiu do chimpanzé diretamente há poucas centenas de anos.'},
-    {label:'C', text:'A similaridade é coincidência sem relação evolutiva.'},
-    {label:'D', text:'Sequências semelhantes implicam que são a mesma espécie.'}
+  {id:'A3-Q4', aula:3, text:`Em nosso estudo sobre biologia molecular, comparamos sequências de DNA de diferentes primatas. O que a grande similaridade entre o DNA humano e o de chimpanzés nos indica sobre nossa história evolutiva?`, imageUrl: 'https://images.unsplash.com/photo-1560672655-14c5bd3db26f?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que humanos e chimpanzés compartilham um ancestral comum relativamente recente.'},
+    {label:'B', text:'Que humanos evoluíram diretamente dos chimpanzés modernos.'},
+    {label:'C', text:'Que mutações no DNA não afetam a evolução das espécies.'},
+    {label:'D', text:'Que a similaridade genética é coincidência sem significado evolutivo.'}
   ]},
-  {id:'A3-Q5', aula:3, text:`O "relógio molecular" é usado para estimar tempos de divergência entre espécies com base em taxas de mutação. Qual é uma limitação desse método?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Relógio+Molecular', options:[
-    {label:'A', text:'A variabilidade nas taxas de mutação entre genes e linhagens exige calibração por fósseis ou outros dados; sem calibração, as estimativas podem ser imprecisas.'},
-    {label:'B', text:'Ele não usa DNA, apenas anatomia.'},
-    {label:'C', text:'É aplicável apenas a microrganismos.'},
-    {label:'D', text:'É uma técnica que substitui completamente o registro fóssil sem necessidade de correlação.'}
+  {id:'A3-Q5', aula:3, text:`Durante a aula sobre órgãos vestigiais, discutimos a presença do apêndice vermiforme em humanos. Qual a importância evolutiva desta estrutura?`, imageUrl: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'É um vestígio de uma estrutura que tinha função digestiva em nossos ancestrais herbívoros.'},
+    {label:'B', text:'É uma adaptação recente para digestão de alimentos industrializados.'},
+    {label:'C', text:'É resultado de mutações prejudiciais que persistiram por deriva genética.'},
+    {label:'D', text:'É uma estrutura necessária para a evolução futura da espécie humana.'}
   ]},
-  {id:'A3-Q6', aula:3, text:`Evidências de evolução observáveis em "tempo real" incluem resistência bacteriana a antibióticos. Explique por que esses casos ilustram seleção natural em ação.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Resistência+Antibióticos', options:[
-    {label:'A', text:'Porque mutações que conferem resistência aumentam a sobrevivência em ambientes com antibióticos, logo indivíduos resistentes se tornam mais frequentes.'},
-    {label:'B', text:'Porque bactérias decidem conscientemente se tornar resistentes.'},
-    {label:'C', text:'Porque antibióticos provocam cruzamentos entre bactérias.'},
-    {label:'D', text:'Porque resistência bacteriana significa que a evolução parou.'}
+  {id:'A3-Q6', aula:3, text:`Em nossa análise de distribuição geográfica de espécies, observamos que tatus e preguiças gigantes extintas são encontrados apenas nas Américas, enquanto seus parentes mais próximos, os pangolins, estão na África e Ásia. Isto sustenta a ideia de:`, imageUrl: 'https://images.unsplash.com/photo-1516545595035-b494dd0161e4?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que a evolução desses grupos ocorreu após a separação dos continentes.'},
+    {label:'B', text:'Que estes animais migraram recentemente entre continentes.'},
+    {label:'C', text:'Que a seleção natural produziu resultados idênticos em continentes diferentes.'},
+    {label:'D', text:'Que mutações aleatórias são influenciadas pela localização geográfica.'}
   ]},
-  {id:'A3-Q7', aula:3, text:`A paleontologia frequentemente apresenta lacunas no registro fóssil. Mesmo assim, fósseis são fundamentais. Escolha a alternativa que melhor explica esse papel.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Registro+Fóssil', options:[
-    {label:'A', text:'Fósseis fornecem evidências diretas de formas de vida passadas, permitindo rastrear mudanças morfológicas e calibrar hipóteses evolutivas, embora o registro seja incompleto.'},
-    {label:'B', text:'Fósseis são inúteis porque sempre faltam dados.'},
-    {label:'C', text:'Fósseis sempre preservam DNA intacto para comparação direta.'},
-    {label:'D', text:'Fósseis não têm nenhuma relação com evolução.'}
+  {id:'A3-Q7', aula:3, text:`Ao estudarmos a resistência a antibióticos em bactérias, observamos que esta característica pode surgir rapidamente. Este fenômeno é considerado uma evidência da evolução porque:`, imageUrl: 'https://images.unsplash.com/photo-1588072432839-e8f7a7bff0d2?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Demonstra a seleção natural em ação, onde bactérias resistentes sobrevivem e se reproduzem em ambientes com antibióticos.'},
+    {label:'B', text:'Mostra que bactérias podem decidir conscientemente tornar-se resistentes.'},
+    {label:'C', text:'Comprova que mutações são sempre benéficas para os organismos.'},
+    {label:'D', text:'Indica que antibióticos causam mutações direcionadas.'}
   ]},
-  {id:'A3-Q8', aula:3, text:`Biologia do desenvolvimento evolutivo (evo-devo) investiga genes como HOX. Por que pequenas mutações nesses genes podem causar grandes variações fenotípicas?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Genes+HOX', options:[
-    {label:'A', text:'Porque genes de desenvolvimento são reguladores mestres que controlam padrões de construção do corpo; alterações neles podem reorientar o desenvolvimento de estruturas importantes.'},
-    {label:'B', text:'Porque HOX é responsável apenas pela cor da pele.'},
-    {label:'C', text:'Porque mutações em HOX são sempre letais e não observáveis.'},
-    {label:'D', text:'Porque HOX não está relacionado ao desenvolvimento'}
+  {id:'A3-Q8', aula:3, text:`Em nossa aula sobre datação radiométrica, aprendemos que fósseis mais antigos são encontrados em estratos rochosos mais profundos. Qual a importância deste princípio para o estudo da evolução?`, imageUrl: 'https://images.unsplash.com/photo-1618828665016-697a6f494ed2?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Permite estabelecer uma sequência temporal da história evolutiva na Terra.'},
+    {label:'B', text:'Comprova que todas as espécies surgiram simultaneamente.'},
+    {label:'C', text:'Demonstra que fósseis podem migrar entre camadas geológicas.'},
+    {label:'D', text:'Indica que a Terra tem apenas alguns milhares de anos.'}
   ]},
-  {id:'A3-Q9', aula:3, text:`Entre as alternativas a seguir, qual resumidamente indica por que combinações de diferentes linhas de evidência (fósseis, embriologia, genética) são mais robustas do que uma única linha de evidência?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Linhas+Evidência', options:[
-    {label:'A', text:'Porque evidências independentes que convergem para a mesma conclusão reducem a chance de interpretação equivocada e fortalecem as inferências históricas.'},
-    {label:'B', text:'Porque múltiplas evidências têm sempre os mesmos defeitos.'},
-    {label:'C', text:'Porque genética e fósseis mostram sempre resultados contraditórios.'},
-    {label:'D', text:'Porque apenas a embriologia é confiável.'}
+  {id:'A3-Q9', aula:3, text:`Ao compararmos as sequências do gene da citocromo c em diferentes organismos, observamos que espécies mais próximas evolutivamente apresentam sequências mais similares. Isto sustenta a ideia de:`, imageUrl: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que moléculas também carregam informações sobre relações evolutivas, assim como características morfológicas.'},
+    {label:'B', text:'Que todas as espécies têm exatamente os mesmos genes.'},
+    {label:'C', text:'Que mutações ocorrem sempre na mesma taxa em todos os organismos.'},
+    {label:'D', text:'Que a evolução molecular não segue os mesmos princípios da evolução morfológica.'}
   ]},
-  {id:'A3-Q10', aula:3, text:`Um paleontólogo encontra um fóssil com caracteres intermediários entre répteis e aves. Que papel esse achado cumpre no debate sobre a evolução das aves?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Fóssil+Réptil+Ave', options:[
-    {label:'A', text:'Fornece suporte empírico à hipótese de transição evolutiva entre répteis e aves, ilustrando etapas intermediárias.'},
-    {label:'B', text:'Desmente a evolução porque espécies intermediárias não existem.'},
-    {label:'C', text:'Prova que répteis e aves são idênticos.'},
-    {label:'D', text:'Nada prova porque fósseis não são confiáveis.'}
+  {id:'A3-Q10', aula:3, text:`Em nossa discussão sobre biogeografia insular, analisamos a fauna peculiar da Austrália. A presência de tantos marsupiais e a ausência de mamíferos placentários nativos (exceto morcegos e roedores) nesta região sugere:`, imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Que a Austrália se isolou precocemente, permitindo a radiação adaptativa dos marsupiais sem competição com placentários.'},
+    {label:'B', text:'Que placentários não conseguem sobreviver no clima australiano.'},
+    {label:'C', text:'Que marsupiais são evolutionarymente superiores aos placentários.'},
+    {label:'D', text:'Que a seleção artificial preferiu marsupiais na Austrália.'}
   ]},
 
   // Aula 4 - Biodiversidade (A4-Q1..A4-Q10)
-  {id:'A4-Q1', aula:4, text:`A biodiversidade pode ser entendida em três níveis: diversidade genética, de espécies e de ecossistemas. Para um manejo eficaz da conservação, por que é necessário considerar os três níveis simultaneamente?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Níveis+Biodiversidade', options:[
-    {label:'A', text:'Porque diversidade genética permite adaptabilidade; diversidade de espécies mantém funções ecológicas; diversidade de ecossistemas assegura resiliência e serviços. Ignorar qualquer nível reduz sucesso de conservação.'},
-    {label:'B', text:'Porque apenas diversidade de espécies é relevante.'},
-    {label:'C', text:'Porque diversidade genética é sempre negligenciável.'},
-    {label:'D', text:'Porque ecossistemas são todos iguais e não precisam de estudo.'}
+  {id:'A4-Q1', aula:4, text:`Em nossa aula sobre hotspots de biodiversidade, discutimos a importância da Mata Atlântica. Qual fator contribui para a alta diversidade biológica deste bioma?`, imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Sua variedade de ambientes, como florestas ombrófilas, restingas, manguezais e campos de altitude.'},
+    {label:'B', text:'Sua localização exclusivamente no Brasil, sem similar em outros países.'},
+    {label:'C', text:'A ausência de atividades humanas ao longo de sua história.'},
+    {label:'D', text:'Solo homogêneo que favorece todas as espécies igualmente.'}
   ]},
-  {id:'A4-Q2', aula:4, text:`Defina serviços ecossistêmicos e indique corretamente um exemplo de cada categoria (provisão, regulação, cultural, suporte).`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Serviços+Ecossistêmicos', options:[
-    {label:'A', text:'Provisão: madeira; Regulação: controle climático; Cultural: recreação; Suporte: ciclagem de nutrientes.'},
-    {label:'B', text:'Provisão: poluição; Regulação: extinção; Cultural: mineração; Suporte: degradação.'},
-    {label:'C', text:'Provisão: serviços bancários; Regulação: impostos; Cultural: televisão; Suporte: transporte público.'},
-    {label:'D', text:'Provisão: nada; Regulação: nada; Cultural: nada; Suporte: nada.'}
+  {id:'A4-Q2', aula:4, text:`Durante nossa saída de campo ao Parque Estadual, observamos diferentes estratos da floresta (dossel, sub-bosque, solo). Como esta estrutura vertical influencia a biodiversidade?`, imageUrl: 'https://images.unsplash.com/photo-1470240731273-7821a6eeb6a2?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Cria microhabitats diversificados que permitem a coexistência de espécies com diferentes requisitos ecológicos.'},
+    {label:'B', text:'Limita a diversidade porque apenas espécies adaptadas a um estrato específico podem sobreviver.'},
+    {label:'C', text:'Não influencia a biodiversidade, que depende apenas da diversidade de plantas.'},
+    {label:'D', text:'Reduz a competição tornando desnecessária a especialização de espécies.'}
   ]},
-  {id:'A4-Q3', aula:4, text:`Quais fatores contribuem diretamente para a maior diversidade de espécies em florestas tropicais comparadas a desertos?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Floresta+Tropical+Deserto', options:[
-    {label:'A', text:'Maior disponibilidade de recursos, clima estável e uma complexa rede de interações ecológicas.'},
-    {label:'B', text:'Menos espécies por causa da competição intensa.'},
-    {label:'C', text:'Porque florestas tropicais são sempre menores em área.'},
-    {label:'D', text:'Porque desertos são mais antigos que florestas e, portanto, menos diversos.'}
+  {id:'A4-Q3', aula:4, text:`Em nossa discussão sobre sucessão ecológica, observamos que áreas em diferentes estágios sucessionais abrigam comunidades distintas. Isto demonstra que:`, imageUrl: 'https://images.unsplash.com/photo-1469827160215-9d29e96e72f4?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'A biodiversidade varia ao longo do processo sucessional, com picos em estágios intermediários.'},
+    {label:'B', text:'Áreas recém-disturbadas sempre abrigam a maior diversidade.'},
+    {label:'C', text:'Florestas maduras têm menor diversidade porque espécies são excluídas por competição.'},
+    {label:'D', text:'A sucessão ecológica não afeta a composição de espécies de uma área.'}
   ]},
-  {id:'A4-Q4', aula:4, text:`A perda de habitat é uma ameaça chave à biodiversidade. Entre as alternativas abaixo, qual NÃO representa uma consequência direta da perda de habitat?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Perda+Habitat', options:[
-    {label:'A', text:'Redução do tamanho das populações e perda de conectividade entre fragmentos.'},
-    {label:'B', text:'Aumento da vulnerabilidade a extinções locais.'},
-    {label:'C', text:'Melhora imediata e sustentável da diversidade biológica no longo prazo.'},
-    {label:'D', text:'Diminuição de serviços ecossistêmicos como polinização e purificação de água.'}
+  {id:'A4-Q4', aula:4, text:`Ao estudarmos as interações ecológicas, discutimos como a relação entre figueiras e vespas-do-figo contribui para a manutenção da biodiversidade. Qual a importância desta interação?`, imageUrl: 'https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'É um exemplo de mutualismo obrigatório onde ambos dependem um do outro para reprodução, sustentando diversas cadeias alimentares.'},
+    {label:'B', text:'É uma relação de parasitismo que limita a dispersão das figueiras.'},
+    {label:'C', text:'É uma competição interespecífica que reduz a diversidade de insetos polinizadores.'},
+    {label:'D', text:'É um caso de predação que controla populacionalmente as figueiras.'}
   ]},
-  {id:'A4-Q5', aula:4, text:`Explique a relação entre extinções em massa e irradiações adaptativas subsequentes (ex.: mamíferos após extinção dos dinossauros).`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Extinção+Irradiação', options:[
-    {label:'A', text:'Extinções em massa eliminam competidores e abrem nichos ecológicos, permitindo que linagens sobreviventes diversifiquem-se adaptativamente.'},
-    {label:'B', text:'Extinções em massa impedem qualquer nova radiação de espécies.'},
-    {label:'C', text:'Irradiação adaptativa reduz biodiversidade em larga escala.'},
-    {label:'D', text:'Não há relação entre extinções e irradiações adaptativas.'}
+  {id:'A4-Q5', aula:4, text:`Em nossa análise de ilhas oceânicas, observamos que elas geralmente abrigam espécies endêmicas. Qual fator contribui para este padrão?`, imageUrl: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Isolamento geográfico que permite evolução independente e adaptação a condições específicas.'},
+    {label:'B', text:'Baixa competição interespecífica devido ao pequeno número de espécies.'},
+    {label:'C', text:'Ausência de predadores que permitiria a qualquer espécie estabelecer-se.'},
+    {label:'D', text:'Condições ambientais idênticas às do continente mais próximo.'}
   ]},
-  {id:'A4-Q6', aula:4, text:`A conservação baseada em unidades de conservação (UCs) é uma estratégia usada para proteger a biodiversidade. Qual das alternativas descreve melhor uma função das UCs?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Unidades+Conservação', options:[
-    {label:'A', text:'Ucs servem apenas para turismo e não influenciam biodiversidade.'},
-    {label:'B', text:'Ucs garantem proteção legal de áreas, preservam habitat crítico e podem manter corredores ecológicos entre populações.'},
-    {label:'C', text:'Ucs incentivam a desmatação controlada.'},
-    {label:'D', text:'Ucs servem para depositar lixo.'}
+  {id:'A4-Q6', aula:4, text:`Durante nossa aula sobre a Teoria de Biogeografia de Ilhas, discutimos por que ilhas maiores geralmente abrigam mais espécies. Qual explicação correta para este padrão?`, imageUrl: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Maior área proporciona mais habitats diversificados e suporta populações maiores, menos vulneráveis à extinção.'},
+    {label:'B', text:'Ilhas maiores são sempre mais próximas do continente, facilitando a colonização.'},
+    {label:'C', text:'Ilhas menores têm taxas de extinção mais baixas, mas mesmo assim abrigam menos espécies.'},
+    {label:'D', text:'O tamanho da ilha não influencia a diversidade de espécies, apenas o tipo de habitat.'}
   ]},
-  {id:'A4-Q7', aula:4, text:`O ODS 15 tem objetivo relacionado à vida terrestre. Escolha a alternativa que melhor descreve uma meta desse ODS.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+ODS+15', options:[
-    {label:'A', text:'Proteger, restaurar e promover uso sustentável dos ecossistemas terrestres e frear a perda de biodiversidade.'},
-    {label:'B', text:'Eliminar todas as áreas protegidas e abrir espaço para exploração.'},
-    {label:'C', text:'Reduzir áreas florestais para aumentar agricultura sem medidas sustentáveis.'},
-    {label:'D', text:'Promover a extinção de espécies invasoras sem monitoramento.'}
+  {id:'A4-Q7', aula:4, text:`Em nossa discussão sobre os serviços ecossistêmicos da biodiversidade, analisamos a polinização. Qual a importância da diversidade de polinizadores para a agricultura?`, imageUrl: 'https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Diferentes polinizadores visitam diferentes plantas, garantindo a polinização mesmo se uma espécie de polinizador declinar.'},
+    {label:'B', text:'Apenas abelhas melíferas são eficientes, tornando desnecessária a diversidade de polinizadores.'},
+    {label:'C', text:'Polinizadores nativos não são importantes, pois cultivos agrícolas dependem apenas de polinização manual.'},
+    {label:'D', text:'A diversidade de polinizadores reduz a produtividade agrícola devido à competição por recursos.'}
   ]},
-  {id:'A4-Q8', aula:4, text:`Indique qual abordagem é mais eficaz para diminuir a pegada ecológica de uma comunidade local.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Pegada+Ecológica', options:[
-    {label:'A', text:'Promover consumo consciente, gestão de resíduos, práticas agrícolas sustentáveis e proteção de áreas naturais integradas com políticas públicas.'},
-    {label:'B', text:'Aumentar consumo de recursos e poluição para estimular a economia.'},
-    {label:'C', text:'Remover todas as unidades de conservação para expandir áreas urbanas.'},
-    {label:'D', text:'Estimular apenas o turismo massivo sem planejar infra-estrutura ambiental.'}
+  {id:'A4-Q8', aula:4, text:`Ao estudarmos a fragmentação de habitats, observamos que bordas de fragmentos florestais apresentam condições microclimáticas diferentes do interior. Como isto afeta a biodiversidade?`, imageUrl: 'https://images.unsplash.com/photo-1618173745207-8f5e2978c4a8?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Espécies especialistas de interior sofrem com condições de borda, enquanto generalistas podem se beneficiar.'},
+    {label:'B', text:'Todas as espécies se beneficiam das condições de borda, que são mais diversificadas.'},
+    {label:'C', text:'Apenas plantas são afetadas, enquanto animais podem mover-se livremente entre habitats.'},
+    {label:'D', text:'Fragmentos pequenos têm menos borda, portanto abrigam menos biodiversidade.'}
   ]},
-  {id:'A4-Q9', aula:4, text:`Por que a diversidade genética dentro de uma população é crucial para sua capacidade de responder a mudanças ambientais (ex.: surgimento de novos patógenos)?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Diversidade+Genética', options:[
-    {label:'A', text:'Porque maior diversidade genética garante maior probabilidade de existirem variantes que tolerem novas pressões, aumentando chance de persistência.'},
-    {label:'B', text:'Porque diversidade genética impede qualquer mutação.'},
-    {label:'C', text:'Porque indivíduos idênticos geneticamente se adaptam melhor.'},
-    {label:'D', text:'Porque diversidade genética reduz a capacidade de reprodução.'}
+  {id:'A4-Q9', aula:4, text:`Em nossa análise de espécies-chave, discutimos o papel dos lobos-guará no Cerrado. Por que esta espécie é considerada importante para manutenção da biodiversidade?`, imageUrl: 'https://images.unsplash.com/photo-1543946608-3b7eb875d41a?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Por dispersar sementes de frutos que consome, contribuindo para a regeneração vegetal.'},
+    {label:'B', text:'Por ser um predador de topo que controla populações de muitas presas, afetando todo o ecossistema.'},
+    {label:'C', text:'Por competir com outras espécies carnívoras, reduzindo a diversidade de predadores.'},
+    {label:'D', text:'Por ser uma espécie bandeira, mas sem papel ecológico significativo.'}
   ]},
-  {id:'A4-Q10', aula:4, text:`Assinale a alternativa que apresenta uma prática de manejo que pode conciliar conservação da biodiversidade e desenvolvimento sustentável local.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Manejo+Sustentável', options:[
-    {label:'A', text:'Criação de áreas protegidas com uso sustentável associado (agroflorestas), educação ambiental e participação comunitária.'},
-    {label:'B', text:'Exploração predatória sem regulamentação.'},
-    {label:'C', text:'Urbanização total de áreas naturais.'},
-    {label:'D', text:'Substituição de florestas por plantações monoespecíficas sem planejamento.'}
+  {id:'A4-Q10', aula:4, text:`Durante nossa aula sobre mudanças climáticas, discutimos como o aumento da temperatura pode afetar a biodiversidade. Qual é uma possível consequência?`, imageUrl: 'https://images.unsplash.com/photo-1618173745207-8f5e2978c4a8?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Espécies podem tentar migrar para altitudes ou latitudes maiores em busca de condições adequadas.'},
+    {label:'B', text:'Todas as espécies conseguirão adaptar-se rapidamente às novas condições.'},
+    {label:'C', text:'A biodiversidade aumentará uniformemente em todos os ecossistemas.'},
+    {label:'D', text:'As interações ecológicas não serão afetadas, apenas a fisiologia individual.'}
   ]},
 
   // Aula 5 - Preservação e Impacto Humano (A5-Q1..A5-Q10)
-  {id:'A5-Q1', aula:5, text:`Entre as estratégias de preservação da biodiversidade, qual das alternativas representa ação governamental e comunitária integrada?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Preservação+Biodiversidade', options:[
-    {label:'A', text:'Aprovação e implementação de unidades de conservação junto com educação ambiental e incentivos a práticas sustentáveis pelos moradores locais.'},
-    {label:'B', text:'Desregularização total das áreas protegidas.'},
-    {label:'C', text:'Privatização indiscriminada de todos os ecossistemas.'},
-    {label:'D', text:'Construção de obras sem estudos ambientais.'}
+  {id:'A5-Q1', aula:5, text:`Em nossa aula sobre impactos antrópicos, discutimos a fragmentação de habitats. Como a construção de rodovias através de áreas florestais afeta a biodiversidade?`, imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Isola populações, impede fluxo gênico e aumenta o risco de atropelamentos de fauna.'},
+    {label:'B', text:'Cria novos habitats de borda que beneficiam todas as espécies igualmente.'},
+    {label:'C', text:'Não afeta a biodiversidade, pois animais aprendem rapidamente a evitar estradas.'},
+    {label:'D', text:'Aumenta a conectividade entre fragmentos, facilitando o movimento de espécies.'}
   ]},
-  {id:'A5-Q2', aula:5, text:`Espécies invasoras podem causar grande impacto. Qual das alternativas descreve uma medida eficaz de controle?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Espécies+Invasoras', options:[
-    {label:'A', text:'Ignorar a presença de invasoras até que o problema se estabilize.'},
-    {label:'B', text:'Implementação de programas de detecção precoce, controle biológico/remoção e restauração e habitat nativo.'},
-    {label:'C', text:'Introduzir mais espécies exóticas para competir com a invasora.'},
-    {label:'D', text:'Queimar grandes áreas sem critérios.'}
+  {id:'A5-Q2', aula:5, text:`Durante nossa discussão sobre espécies invasoras, analisamos o caso do mexilhão-dourado no Brasil. Qual o impacto ecológico desta espécie?`, imageUrl: 'https://images.unsplash.com/photo-1585399019070-4fe5c8a7f254?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Competição com espécies nativas, alteração de habitat e entupimento de tubulações.'},
+    {label:'B', text:'Aumento da diversidade de moluscos nos ecossistemas aquáticos.'},
+    {label:'C', text:'Melhoria da qualidade da água através de sua ação filtradora.'},
+    {label:'D', text:'Não causa impactos significativos por ser uma espécie pequena.'}
   ]},
-  {id:'A5-Q3', aula:5, text:`Explique por que políticas públicas (leis ambientais) são essenciais para a preservação da biodiversidade.`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Políticas+Públicas+Ambientais', options:[
-    {label:'A', text:'Porque definem regras, financiam conservação, regulam exploração de recursos e incentivam práticas sustentáveis em escala que indivíduos isolados não conseguiriam.'},
-    {label:'B', text:'Porque leis resolvem tudo sem necessidade de monitoramento.'},
-    {label:'C', text:'Porque leis podem ser ignoradas sem consequências.'},
-    {label:'D', text:'Porque políticas públicas sempre prejudicam biodiversidade.'}
+  {id:'A5-Q3', aula:5, text:`Em nossa aula sobre unidades de conservação, discutimos a diferença entre proteção integral e uso sustentável. Qual é a principal diferença?`, imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Unidades de proteção integral visam preservar a natureza com mínimo impacto humano, enquanto unidades de uso sustentável permitem exploração racional de recursos.'},
+    {label:'B', text:'Unidades de proteção integral permitem maior exploração que unidades de uso sustentável.'},
+    {label:'C', text:'Não há diferença significativa entre estas categorias de unidades de conservação.'},
+    {label:'D', text:'Unidades de uso sustentável são mais restritivas que unidades de proteção integral.'}
   ]},
-  {id:'A5-Q4', aula:5, text:`Práticas agrícolas sustentáveis podem mitigar impactos sobre a biodiversidade. Qual alternativa ilustra uma prática recomendada?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Agricultura+Sustentável', options:[
-    {label:'A', text:'Monocultura intensiva sem tutela ambiental.'},
-    {label:'B', text:'Uso intensivo de pesticidas sem rotação de culturas.'},
-    {label:'C', text:'Integração lavoura-pecuária-floresta (ILPF) e redução do uso de insumos por práticas agroecológicas.'},
-    {label:'D', text:'Desmatamento para ampliar área cultivável.'}
+  {id:'A5-Q4', aula:5, text:`Ao estudarmos a poluição por plásticos nos oceanos, discutimos como microplásticos afetam a vida marinha. Qual é um dos principais impactos?`, imageUrl: 'https://images.unsplash.com/photo-1618477388955-04156c4c7bb1?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Ingestão por organismos marinhos, causando obstrução digestiva e introdução de toxinas na cadeia alimentar.'},
+    {label:'B', text:'Aumento da biodiversidade ao criar novos habitats artificiais.'},
+    {label:'C', text:'Melhoria da qualidade da água através da filtragem por partículas plásticas.'},
+    {label:'D', text:'Não há evidências de impactos significativos da poluição por microplásticos.'}
   ]},
-  {id:'A5-Q5', aula:5, text:`A pesca predatória provoca colapso de populações. Uma gestão sustentável da pesca deve incluir:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Pesca+Sustentável', options:[
-    {label:'A', text:'Licenças ilimitadas e sem monitoramento.'},
-    {label:'B', text:'Cotas baseadas em dados científicos, áreas marinhas protegidas e fiscalização para evitar sobreexploração.'},
-    {label:'C', text:'Proibição total de todo tipo de pesca sem alternativas econômicas.'},
-    {label:'D', text:'Incentivo à pesca ilegal para aumentar oferta.'}
+  {id:'A5-Q5', aula:5, text:`Em nossa discussão sobre o tráfico de animais silvestres, analisamos seus impactos ecológicos. Qual das alternativas descreve um desses impactos?`, imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Redução populacional de espécies alvo, desequilíbrio ecológico e introdução de doenças.'},
+    {label:'B', text:'Aumento da diversidade genética através da dispersão forçada de indivíduos.'},
+    {label:'C', text:'Conservação de espécies ameaçadas através de sua criação em cativeiro.'},
+    {label:'D', text:'Não causa impactos significativos pois a maioria dos animais capturados sobrevive bem em cativeiro.'}
   ]},
-  {id:'A5-Q6', aula:5, text:`Projetos de restauração ecológica visam recuperar áreas degradadas. Qual alternativa descreve princípios fundamentais dessas ações?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Restauração+Ecológica', options:[
-    {label:'A', text:'Analisar as condições locais, usar espécies nativas, controlar invasoras e monitorar sucessão ecológica.'},
-    {label:'B', text:'Importar espécies exóticas sem estudo prévio.'},
-    {label:'C', text:'Queimar a área para facilitar plantio de exóticas.'},
-    {label:'D', text:'Não realizar planejamento e agir por tentativa e erro.'}
+  {id:'A5-Q6', aula:5, text:`Durante nossa aula sobre restauração ecológica, discutimos técnicas como nucleação. Em que consiste esta técnica?`, imageUrl: 'https://images.unsplash.com/photo-1469827160215-9d29e96e72f4?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Criação de pequenos focos de diversidade que facilitam a dispersão natural de espécies para a área degradada.'},
+    {label:'B', text:'Plantio homogêneo de uma única espécie exótica de rápido crescimento.'},
+    {label:'C', text:'Uso exclusivo de maquinário pesado para preparo do terreno.'},
+    {label:'D', text:'Conversão de áreas degradadas em plantações comerciais como forma de restauração.'}
   ]},
-  {id:'A5-Q7', aula:5, text:`Que papel têm corredores ecológicos na conservação da biodiversidade?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Corredores+Ecológicos', options:[
-    {label:'A', text:'Servem apenas para fins estéticos e não têm função ecológica.'},
-    {label:'B', text:'Conectam populações fragmentadas, permitindo fluxo gênico e movimentação de espécies, reduzindo risco de extinção local.'},
-    {label:'C', text:'São áreas de passagem apenas para turistas.'},
-    {label:'D', text:'Impedem migrações naturais.'}
+  {id:'A5-Q7', aula:5, text:`Em nossa discussão sobre agricultura sustentável, analisamos sistemas agroflorestais. Qual a vantagem destes sistemas em relação à agricultura convencional?`, imageUrl: 'https://images.unsplash.com/photo-1597328290880-65dfc856d2f0?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Manutenção da diversidade biológica, conservação do solo e geração de renda diversificada.'},
+    {label:'B', text:'Maior produtividade imediata de monoculturas com uso intensivo de insumos.'},
+    {label:'C', text:'Simplificação do manejo através do cultivo de uma única espécie.'},
+    {label:'D', text:'Eliminação completa de pragas e doenças sem necessidade de controle.'}
   ]},
-  {id:'A5-Q8', aula:5, text:`Tecnologias de monitoramento (sensoriamento remoto, câmeras, eDNA) ajudam na gestão da biodiversidade. Qual alternativa descreve vantagem principal dessa tecnologia?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Monitoramento+Biodiversidade', options:[
-    {label:'A', text:'Permite detecção e monitoramento não invasivo e contínuo, subsidiando decisões de manejo com dados reais.'},
-    {label:'B', text:'Substitui totalmente o olhar crítico do pesquisador.'},
-    {label:'C', text:'Serve apenas para publicidade sem utilidade científica.'},
-    {label:'D', text:'Diminui a necessidade de políticas públicas.'}
+  {id:'A5-Q8', aula:5, text:`Ao estudarmos a crise de polinizadores, discutimos o desaparecimento de abelhas. Qual fator NÃO contribui para este declínio?`, imageUrl: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Aumento da diversidade de plantas floríferas em áreas agrícolas.'},
+    {label:'B', text:'Uso de pesticidas neonicotinoides que afetam o sistema nervoso dos insetos.'},
+    {label:'C', text:'Perda de habitat e fontes de alimentação diversificadas.'},
+    {label:'D', text:'Pressão de patógenos e parasitas como ácaros Varroa.'}
   ]},
-  {id:'A5-Q9', aula:5, text:`A educação ambiental é peça-chave para mudança de comportamento. Qual estratégia é mais provável de gerar impacto local duradouro?`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Educação+Ambiental', options:[
-    {label:'A', text:'Programas escolares com projetos práticos, engajamento comunitário e atividades que conectem conhecimento à realidade local.'},
-    {label:'B', text:'Distribuição de folhetos sem atividades práticas.'},
-    {label:'C', text:'Campanhas únicas sem continuidade.'},
-    {label:'D', text:'Medidas punitivas sem educação.'}
+  {id:'A5-Q9', aula:5, text:`Em nossa aula sobre consumo sustentável, discutimos a importância de escolhas conscientes. Qual das alternativas representa uma prática de consumo mais sustentável?`, imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Preferir produtos locais e sazonais, reduzindo a pegada de carbono do transporte.'},
+    {label:'B', text:'Buscar sempre os produtos mais baratos, independentemente de sua origem ou impacto.'},
+    {label:'C', text:'Consumir exclusivamente produtos importados, que geralmente têm melhor qualidade.'},
+    {label:'D', text:'Ignorar certificações ambientais, pois não reflectem impactos reais.'}
   ]},
-  {id:'A5-Q10', aula:5, text:`Para finalizar, identifique qual conjunto de ações agrega maior efeito positivo na proteção da biodiversidade em um município litorâneo:`, imageUrl: 'https://via.placeholder.com/600x300?text=Imagem+Proteção+Biodiversidade+Litoral', options:[
-    {label:'A', text:'Combinação de unidades de conservação marinhas, fiscalização de pesca, saneamento básico e educação ambiental integrada.'},
-    {label:'B', text:'Expansão de empreendimentos costeiros sem regulamentos.'},
-    {label:'C', text:'Atividades que aumentem poluição e degradação de praias.'},
-    {label:'D', text:'Substituição da pesca local por exploração industrial sem controle.'}
+  {id:'A5-Q10', aula:5, text:`Durante nossa discussão sobre cidades sustentáveis, analisamos a importância de áreas verdes urbanas. Qual NÃO é um benefício destas áreas?`, imageUrl: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=600', options:[
+    {label:'A', text:'Aumento da poluição atmosférica devido à liberação de compostos orgânicos voláteis pelas plantas.'},
+    {label:'B', text:'Redução do efeito de ilha de calor urbano através da evapotranspiração.'},
+    {label:'C', text:'Melhoria da saúde mental da população através do contato com natureza.'},
+    {label:'D', text:'Criação de corredores ecológicos para a fauna urbana e conservação da biodiversidade.'}
   ]}
 ];
 
@@ -627,7 +627,7 @@ function renderQuestions(){
 document.getElementById('submitBtn').addEventListener('click',async ()=>{
   const name = studentSelect.value;
   if(!name){ alert('Selecione seu nome antes de enviar.'); studentSelect.focus(); return; }
-  if(!SERVER_URL || SERVER_URL.includes('https://script.google.com/macros/s/AKfycbxR_C5UZk0yIM5L5X1cj8c5COmh_9FaVNtICDAfpMhUlSe8K2yKq_UcsQPMOcS9xSg/exec')){ 
+  if(!SERVER_URL || SERVER_URL.includes('COLE_AQUI_A_URL_DO_SEU_WEBAPP')){ 
     alert('Configure a SERVER_URL com a URL do seu Web App (Apps Script) antes de enviar.'); 
     return; 
   }
@@ -740,5 +740,3 @@ document.getElementById('clearBtn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
-
-
